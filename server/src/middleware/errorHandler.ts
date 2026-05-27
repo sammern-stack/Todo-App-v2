@@ -11,8 +11,8 @@ import { AppError } from "../utils/AppError.js";
 
 type TErrorHandler = (
   error: unknown,
-  res: Response,
   req: Request,
+  res: Response,
   next: NextFunction,
 ) => void;
 // All for parameters are required to let the Express know that its for error handing
@@ -27,7 +27,7 @@ const createErrObj = (message: string): object => ({ ok: false, message });
 // Error Handler
 //—————————————————————————————————————————————————————————————————
 
-export const errorHandler: TErrorHandler = (error, res, req, next) => {
+export const errorHandler: TErrorHandler = (error, req, res, next) => {
   // Errors thrown using AppError.ts
   if (error instanceof AppError) {
     const { statusCode, message } = error;
