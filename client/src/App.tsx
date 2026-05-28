@@ -4,6 +4,8 @@
 
 import { useStartApp } from "./hooks/useStartApp";
 
+import { ThemeSwitch, BackgroundImage } from "./components";
+
 import "./App.scss";
 
 //—————————————————————————————————————————————————————————————————
@@ -15,8 +17,14 @@ const App = () => {
 
   return (
     <div className="todo-app">
+      <BackgroundImage />
+
       <div className="todo-app__content">
-        <div className="todo-app__header"></div>
+        <div className="todo-app__header">
+          <div className="todo-app__title">TODO</div>
+
+          <ThemeSwitch />
+        </div>
 
         <div className="todo-app__body">
           <div className="todo-app__input"></div>
