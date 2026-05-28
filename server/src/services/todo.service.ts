@@ -74,7 +74,7 @@ export const deleteTodo = async (id: string) => {
 };
 
 export const clearTodos = async () => {
-  return Todo.updateMany(
+  await Todo.updateMany(
     { stage: "completed" },
     { $set: { stage: "incomplete" } },
   );
