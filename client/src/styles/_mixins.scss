@@ -1,0 +1,12 @@
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin flex-gap($gap, $direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  gap: $gap;
+}
