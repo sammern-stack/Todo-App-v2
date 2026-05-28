@@ -11,12 +11,12 @@ import type { Response } from "express";
 type TSendSuccess = (
   res: Response,
   data: unknown,
-  code: number,
+  code?: number,
   meta?: Record<string, unknown>,
   message?: string,
 ) => void;
 
-type TSendError = (res: Response, message: string, code: number) => void;
+type TSendError = (res: Response, message: string, code?: number) => void;
 
 //—————————————————————————————————————————————————————————————————
 // Api Response Utilities
