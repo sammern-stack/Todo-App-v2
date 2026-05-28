@@ -32,15 +32,20 @@ $text-preset-2: 700 14px/100% #{$base-font};
 $text-preset-3: 400 14px/100% #{$base-font};
 $text-preset-4: 400 12px/100% #{$base-font};
 
+// Box shadows
+$box-shadow-1: 0 35px 50px -15px rgb(0 0 0 / 0.5);
+
 // Theme based colors
 :root[data-theme="light"] {
   --main-bg: #{$color-gray-050};
   --body-bg: #{$color-white};
   --btn-border: #{$color-purple-300};
+  --input-color: #{$color-purple-800};
 }
 
 :root[data-theme="dark"] {
   --main-bg: #{$color-navy-950};
   --body-bg: #{$color-navy-900};
   --btn-border: #{$color-purple-800};
+  --input-color: #{$color-gray-600};
 }
