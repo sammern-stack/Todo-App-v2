@@ -2,32 +2,19 @@
 // Imports
 //—————————————————————————————————————————————————————————————————
 
-import { useStartApp } from "./hooks/useStartApp";
+import { useEffect } from "react";
 
-import "./App.scss";
+import { useThemeStore } from "../stores/useThemeStore";
 
 //—————————————————————————————————————————————————————————————————
-// App Component
+// Start App hook
 //—————————————————————————————————————————————————————————————————
 
-const App = () => {
-  useStartApp();
+export const useStartApp = () => {
+  const theme = useThemeStore((s) => s.theme);
 
-  return (
-    <div className="todo-app">
-      <div className="todo-app__content">
-        <div className="todo-app__header"></div>
-
-        <div className="todo-app__body">
-          <div className="todo-app__input"></div>
-
-          <div className="todo-app__todos"></div>
-
-          <div className="todo-app__footer"></div>
-        </div>
-      </div>
-    </div>
-  );
+  // Set theme on mount from localStorage
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 };
-
-export default App;
