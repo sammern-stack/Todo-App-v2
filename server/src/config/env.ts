@@ -1,4 +1,9 @@
-const requiredEnvVars = ["PORT", "NODE_ENV", "CLIENT_URL"] as const;
+const requiredEnvVars = [
+  "PORT",
+  "NODE_ENV",
+  "CLIENT_URL",
+  "MONGODB_URI",
+] as const;
 
 // Verify the existence of environmental variables
 requiredEnvVars.forEach((key) => {
@@ -10,4 +15,5 @@ export const config = {
   port: Number(process.env.PORT) || 3000,
   isProduction: process.env.NODE_ENV === "production",
   clientUrl: process.env.CLIENT_URL!,
+  mongodbUri: process.env.MONGODB_URI!,
 };
