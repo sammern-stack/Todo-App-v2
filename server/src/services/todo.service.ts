@@ -44,7 +44,7 @@ export const getTodoById = async (id: string) => {
   return todo;
 };
 
-export const createTodo = async (todo: ITodo) => {
+export const createTodo = async (todo: Pick<ITodo, "title">) => {
   const doesExist = await Todo.findOne({ title: todo.title });
   if (doesExist) throw new AppError("Todo already exist", 409);
   return Todo.create(todo);
