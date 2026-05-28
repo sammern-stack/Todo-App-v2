@@ -35,8 +35,12 @@ $text-preset-4: 400 12px/100% #{$base-font};
 // Theme based colors
 :root[data-theme="light"] {
   --main-bg: #{$color-gray-050};
+  --body-bg: #{$color-white};
+  --btn-border: #{$color-purple-300};
 }
 
 :root[data-theme="dark"] {
   --main-bg: #{$color-navy-950};
+  --body-bg: #{$color-navy-900};
+  --btn-border: #{$color-purple-800};
 }
