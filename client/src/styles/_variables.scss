@@ -31,3 +31,12 @@ $text-preset-1: 400 18px/100% #{$base-font};
 $text-preset-2: 700 14px/100% #{$base-font};
 $text-preset-3: 400 14px/100% #{$base-font};
 $text-preset-4: 400 12px/100% #{$base-font};
+
+// Theme based colors
+:root[data-theme="light"] {
+  --main-bg: #{$color-gray-050};
+}
+
+:root[data-theme="dark"] {
+  --main-bg: #{$color-navy-950};
+}
