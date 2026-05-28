@@ -22,7 +22,7 @@ type TTodoFilters = {
 //—————————————————————————————————————————————————————————————————
 
 const validateId = (id: string) => {
-  if (Types.ObjectId.isValid(id)) throw new AppError("Invalid ID format", 400);
+  if (!Types.ObjectId.isValid(id)) throw new AppError("Invalid ID format", 400);
 };
 
 //—————————————————————————————————————————————————————————————————

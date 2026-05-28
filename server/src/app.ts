@@ -4,6 +4,7 @@
 
 import express from "express";
 import { errorHandler } from "./middleware/errorHandler.js";
+import todoRouters from "./routes/todo.route.js";
 
 // Initialize Express app
 const app = express();
@@ -18,7 +19,7 @@ app.use(express.json());
 // Routes
 //—————————————————————————————————————————————————————————————————
 
-// routes will go here
+app.use("/api/todos", todoRouters);
 
 // Handle errors here
 // Always last so it catches all errors
