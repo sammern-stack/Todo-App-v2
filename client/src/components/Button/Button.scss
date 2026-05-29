@@ -6,6 +6,9 @@
   height: 24px;
   border: 2px solid var(--btn-border);
   border-radius: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &::before {
     content: " ";
@@ -17,7 +20,8 @@
     border-radius: 100vh;
   }
 
-  &:hover {
+  &:hover,
+  &--checked {
     background: $gradient-1;
   }
 
