@@ -4,7 +4,12 @@
 
 import { useStartApp } from "./hooks/useStartApp";
 
-import { ThemeSwitch, BackgroundImage } from "./components";
+import {
+  ThemeSwitch,
+  BackgroundImage,
+  CreateTodo,
+  TodosList,
+} from "./components";
 
 import "./App.scss";
 
@@ -27,9 +32,9 @@ const App = () => {
         </div>
 
         <div className="todo-app__body">
-          <div className="todo-app__input"></div>
+          <CreateTodo />
 
-          <div className="todo-app__todos"></div>
+          <TodosList />
 
           <div className="todo-app__footer"></div>
         </div>
