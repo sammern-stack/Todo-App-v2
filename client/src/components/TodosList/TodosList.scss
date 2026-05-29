@@ -39,5 +39,12 @@
 
   &__actions {
     padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__filters {
+    display: flex;
+    gap: 8px;
   }
 }
