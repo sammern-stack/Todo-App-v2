@@ -1,0 +1,16 @@
+@use "../../styles/globals" as *;
+
+.todo {
+  width: 100%;
+  display: flex;
+  padding: 0 24px;
+
+  &__info {
+    flex: 1;
+    @include flex-gap(24px);
+  }
+
+  &__actions {
+    @include flex-gap(8px);
+  }
+}

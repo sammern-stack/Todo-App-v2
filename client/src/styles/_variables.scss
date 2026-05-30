@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+
+// Colors
+
+$color-white: #ffffff;
+$color-black: #000000;
+
+$color-purple-800: #393a4b;
+$color-purple-700: #4d5067;
+$color-purple-600: #5b5e7e;
+$color-purple-300: #c8cbe7;
+$color-purple-100: #e3e4f1;
+
+$color-gray-600: #9495a5;
+$color-gray-300: #d1d2da;
+$color-gray-050: #d1d2da;
+
+$color-navy-950: #171823;
+$color-navy-900: #25273d;
+$color-navy-850: #494c6b;
+
+$color-blue-500: #3a7cfd;
+
+$gradient-1: linear-gradient(90deg, #55ddff, #c058f3);
+$gradient-2: linear-gradient(90deg, #3710bd, #a42395);
+
+// Typography
+$base-font: "Josefin Sans", sans-serif;
+
+$text-preset-1: 400 18px/100% #{$base-font};
+$text-preset-2: 700 14px/100% #{$base-font};
+$text-preset-3: 400 14px/100% #{$base-font};
+$text-preset-4: 400 12px/100% #{$base-font};
+
+// Box shadows
+$box-shadow-1: 0 35px 50px -15px rgb(0 0 0 / 0.5);
+
+// Theme based colors
+:root[data-theme="light"] {
+  --main-bg: #{$color-gray-050};
+  --body-bg: #{$color-white};
+  --btn-border: #{$color-purple-300};
+  --input-color: #{$color-purple-800};
+}
+
+:root[data-theme="dark"] {
+  --main-bg: #{$color-navy-950};
+  --body-bg: #{$color-navy-900};
+  --btn-border: #{$color-purple-800};
+  --input-color: #{$color-gray-600};
+}

@@ -1,0 +1,25 @@
+@use "../../styles/globals" as *;
+
+.button {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--btn-border);
+  border-radius: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &--hasHover:hover,
+  &--checked {
+    background: $gradient-1;
+  }
+
+  &--empty-state {
+    width: 18px;
+    height: 18px;
+    border-radius: 100vh;
+    background: var(--body-bg);
+    @include absolute-center;
+  }
+}
