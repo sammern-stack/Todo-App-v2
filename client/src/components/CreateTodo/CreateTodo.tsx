@@ -4,7 +4,7 @@ import "./CreateTodo.scss";
 export const CreateTodo = () => {
   return (
     <div className="create-todo">
-      <Button isTodo={false} isInput/>
+      <Button role="create" />
 
       <input
         type="text"

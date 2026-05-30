@@ -22,7 +22,7 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
   return (
     <div className="todo">
       <div className="todo__info">
-        <Button stage={todo.stage} isTodo/>
+        <Button role="todo" isChecked={todo.stage === "complete"} />
         {todo.title}
       </div>
 
