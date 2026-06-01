@@ -14,6 +14,7 @@ export const useStartApp = () => {
   const theme = useThemeStore((s) => s.theme);
 
   const setTodos = useTodosStore((s) => s.setTodos);
+  const setTodosLeft = useTodosStore((s) => s.setTodosLeft);
 
   // Set theme on mount from localStorage
   useEffect(() => {
@@ -22,6 +23,7 @@ export const useStartApp = () => {
 
   useEffect(() => {
     setTodos();
+    setTodosLeft();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };

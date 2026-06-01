@@ -5,6 +5,12 @@
   height: 100%;
   display: flex;
   padding: 0 24px;
+  color: var(--todo-color);
+
+  &--completed {
+    text-decoration: line-through;
+    color: var(--todo-completed);
+  }
 
   &:hover &__actions {
     opacity: 1;
@@ -15,7 +21,6 @@
     @include flex-gap(24px);
     align-items: center;
     font: $text-preset-1;
-    color: var(--todo-color);
   }
 
   &__actions {
