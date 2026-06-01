@@ -91,5 +91,5 @@ export const deleteTodo = asyncHandler(
 
 export const clearTodos = asyncHandler(async (req: Request, res: Response) => {
   await todoService.clearTodos();
-  sendSuccess(res, {}, 204, {}, "All todos are cleared");
+  sendSuccess(res, {}, 200, {}, "All todos are cleared");
 });
