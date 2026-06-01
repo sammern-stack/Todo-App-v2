@@ -25,11 +25,18 @@ interface TodoItemProps {
 
 export const TodoItem = ({ todo }: TodoItemProps) => {
   const deleteTodo = useTodosStore((s) => s.deleteTodo);
+  const toggleTodoState = useTodosStore((s) => s.toggleTodoState);
 
   return (
-    <div className="todo">
+    <div
+      className={`todo ${todo.stage === "complete" ? "todo--completed" : ""}`}
+    >
       <div className="todo__info">
-        <Button role="todo" isChecked={todo.stage === "complete"} />
+        <Button
+          role="todo"
+          isChecked={todo.stage === "complete"}
+          onClick={() => toggleTodoState(todo._id)}
+        />
         <span>{todo.title}</span>
       </div>
 

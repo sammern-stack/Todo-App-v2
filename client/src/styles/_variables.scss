@@ -42,6 +42,7 @@ $box-shadow-1: 0 35px 50px -15px rgb(0 0 0 / 0.5);
   --btn-border: #{$color-purple-300};
   --input-color: #{$color-purple-800};
   --todo-color: #{$color-navy-850};
+  --todo-completed: #{$color-gray-300};
 }
 
 :root[data-theme="dark"] {
@@ -50,4 +51,5 @@ $box-shadow-1: 0 35px 50px -15px rgb(0 0 0 / 0.5);
   --btn-border: #{$color-purple-800};
   --input-color: #{$color-gray-600};
   --todo-color: #{$color-purple-100};
+  --todo-completed: #{$color-purple-700};
 }
