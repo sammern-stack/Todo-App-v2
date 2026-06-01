@@ -29,12 +29,12 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
 
   return (
     <div
-      className={`todo ${todo.stage === "complete" ? "todo--completed" : ""}`}
+      className={`todo ${todo.stage === "completed" ? "todo--completed" : ""}`}
     >
       <div className="todo__info">
         <Button
           role="todo"
-          isChecked={todo.stage === "complete"}
+          isChecked={todo.stage === "completed"}
           onClick={() => toggleTodoState(todo._id)}
         />
         <span>{todo.title}</span>
