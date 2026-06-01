@@ -1,4 +1,4 @@
-export type TStage = "complete" | "incomplete";
+export type TStage = "completed" | "incomplete";
 
 export interface ITodo {
   _id: string
