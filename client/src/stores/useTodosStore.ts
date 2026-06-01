@@ -11,11 +11,13 @@ import {
   getTodosRequest,
   updateTodoRequest,
 } from "../api/todoApi";
-import type { ITodo } from "../types";
+import type { ITodo, TStage } from "../types";
 
 //—————————————————————————————————————————————————————————————————
 // Types
 //—————————————————————————————————————————————————————————————————
+
+export type Filter = "All" | "Completed" | "Active";
 
 interface TodosStore {
   todos: ITodo[];
@@ -24,11 +26,15 @@ interface TodosStore {
   newTodo: string;
   setNewTodo: (todo: string) => void;
 
-  // Helper
-  fetchTodos: () => Promise<ITodo[]>;
+  filter: Filter;
+  setFilter: (filter: Filter) => void;
+
+  // Helpers
+  fetchTodos: (filter?: TStage) => Promise<ITodo[]>;
+  syncTodos: () => Promise<void>;
 
   // Actions
-  setTodos: () => Promise<void>;
+  setTodos: (filter?: TStage) => Promise<void>;
   setTodosLeft: () => void;
   createTodo: (todo: string) => Promise<void>;
   deleteTodo: (id: string) => Promise<void>;
@@ -43,13 +49,31 @@ export const useTodosStore = create<TodosStore>((set, get) => ({
   newTodo: "",
   setNewTodo: (newTodo) => set({ newTodo }),
 
-  fetchTodos: async () => {
-    const todos = await getTodosRequest();
+  filter: "All",
+  setFilter: async (filter) => {
+    set({ filter });
+    await get().setTodos(
+      filter === "Active"
+        ? "incomplete"
+        : filter === "Completed"
+          ? "completed"
+          : undefined,
+    );
+  },
+
+  fetchTodos: async (filter) => {
+    const todos = await getTodosRequest(filter ? { stage: filter } : undefined);
     if (!todos.ok) throw new Error(todos.message);
     return todos.data;
   },
 
-  setTodos: async () => set({ todos: await get().fetchTodos() }),
+  syncTodos: async () => {
+    await get().setTodos();
+    get().setTodosLeft();
+  },
+
+  setTodos: async (filter) =>
+    set({ todos: await get().fetchTodos(filter ? filter : undefined) }),
 
   setTodosLeft: async () => {
     const todos = await get().fetchTodos();
@@ -60,19 +84,13 @@ export const useTodosStore = create<TodosStore>((set, get) => ({
   createTodo: async (todo) => {
     const res = await createTodoRequest({ title: todo });
     if (!res.ok) return console.log(res.message);
-
-    // Refresh Todos
-    await get().setTodos();
-    get().setTodosLeft();
+    await get().syncTodos();
   },
 
   deleteTodo: async (id) => {
     const res = await deleteTodoRequest(id);
     if (!res.ok) return console.log(res.message);
-
-    // Refresh Todos
-    await get().setTodos();
-    get().setTodosLeft();
+    await get().syncTodos();
   },
 
   toggleTodoState: async (id: string) => {
@@ -83,20 +101,12 @@ export const useTodosStore = create<TodosStore>((set, get) => ({
       stage: todo.data.stage === "completed" ? "incomplete" : "completed",
     });
 
-    // Refresh Todos
-    await get().setTodos();
-    get().setTodosLeft();
+    await get().syncTodos();
   },
 
   clearTodos: async () => {
     const res = await clearTodosRequest();
-
-    console.log(res);
-
     if (!res.ok) return console.log(res.message);
-
-    // Refresh Todos
-    await get().setTodos();
-    get().setTodosLeft();
+    await get().syncTodos();
   },
 }));
