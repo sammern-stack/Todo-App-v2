@@ -1,20 +1,15 @@
-import type { ITodo } from "../../types";
+import { useTodosStore } from "../../stores";
 import { TodoItem } from "../TodoItem/TodoItem";
 import "./TodosList.scss";
 
-const TODOS: ITodo[] = [
-  { title: "todo-1", stage: "incomplete" },
-  { title: "todo-2", stage: "incomplete" },
-  { title: "todo-3", stage: "complete" },
-  { title: "todo-4", stage: "complete" },
-];
-
 export const TodosList = () => {
+  const todos = useTodosStore((s) => s.todos);
+
   return (
     <div className="todos">
       <div className="todos__content">
         <div className="todos__list">
-          {TODOS.map((todo) => (
+          {todos.map((todo) => (
             <>
               <TodoItem todo={todo} />
               <div className="todos__divider"></div>
