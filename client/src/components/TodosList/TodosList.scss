@@ -41,10 +41,32 @@
     padding: 0 24px;
     display: flex;
     justify-content: space-between;
+    font: $text-preset-2;
+    color: var(--todo-actions);
   }
 
   &__filters {
     display: flex;
     gap: 8px;
+  }
+
+  &__filter {
+    cursor: pointer;
+
+    &:hover {
+      color: var(--todo-actions-hover);
+    }
+
+    &--active {
+      color: var(--todo-actions-active);
+    }
+  }
+
+  &__clear-all {
+    cursor: pointer;
+
+    &:hover {
+      color: var(--todo-actions-hover);
+    }
   }
 }
