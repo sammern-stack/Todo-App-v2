@@ -1,8 +1,11 @@
 export type TStage = "complete" | "incomplete";
 
 export interface ITodo {
+  _id: string
   title: string;
   stage: TStage;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 // AXIOS TYPES

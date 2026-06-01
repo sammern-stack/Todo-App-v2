@@ -41,6 +41,7 @@ $box-shadow-1: 0 35px 50px -15px rgb(0 0 0 / 0.5);
   --body-bg: #{$color-white};
   --btn-border: #{$color-purple-300};
   --input-color: #{$color-purple-800};
+  --todo-color: #{$color-navy-850};
 }
 
 :root[data-theme="dark"] {
@@ -48,4 +49,5 @@ $box-shadow-1: 0 35px 50px -15px rgb(0 0 0 / 0.5);
   --body-bg: #{$color-navy-900};
   --btn-border: #{$color-purple-800};
   --input-color: #{$color-gray-600};
+  --todo-color: #{$color-purple-100};
 }
