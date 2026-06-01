@@ -35,4 +35,4 @@ export const deleteTodoRequest = (id: string): RequestFn<void> =>
   apiCall(() => api.delete(`/${id}`));
 
 export const clearTodosRequest = (): RequestFn<void> =>
-  apiCall(() => api.patch("/"));
+  apiCall(() => api.patch("/clear"));
