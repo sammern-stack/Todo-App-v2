@@ -1,6 +1,19 @@
-export type TStage = "complete" | "incomplete"
+export type TStage = "complete" | "incomplete";
 
 export interface ITodo {
+  _id: string
   title: string;
   stage: TStage;
+  createdAt: Date;
+  updatedAt: Date;
 }
+
+// AXIOS TYPES
+export type Meta = Record<string, unknown>;
+
+export type ApiResponse<T> =
+  | { ok: true; data: T; meta?: Meta; message?: string }
+  | { ok: false; message: string };
+
+export type RequestFn<T> = Promise<ApiResponse<T>>;
+export type AxiosFn<T> = () => Promise<{ data: ApiResponse<T> }>;

@@ -2,26 +2,24 @@
 // Imports
 //—————————————————————————————————————————————————————————————————
 
-import { useEffect } from "react";
-
-import { useThemeStore, useTodosStore } from "../stores";
+import axios from "axios";
+import type { AxiosFn, RequestFn } from "../types";
 
 //—————————————————————————————————————————————————————————————————
-// Start App hook
+// Axios Utility function
 //—————————————————————————————————————————————————————————————————
 
-export const useStartApp = () => {
-  const theme = useThemeStore((s) => s.theme);
+export const api = axios.create({ baseURL: "http://localhost:3001/api/todos" });
 
-  const setTodos = useTodosStore((s) => s.setTodos);
-
-  // Set theme on mount from localStorage
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
-  useEffect(() => {
-    setTodos();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+export const apiCall = async <T>(fn: AxiosFn<T>): RequestFn<T> => {
+  try {
+    const { data } = await fn();
+    return { ...data };
+  } catch (err) {
+    console.log("Error:", err);
+    return {
+      ok: false,
+      message: `An unexpected error occurred: ${err}`,
+    };
+  }
 };

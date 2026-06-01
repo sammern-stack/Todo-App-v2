@@ -81,7 +81,7 @@ export const deleteTodo = asyncHandler(
     if (!id) throw new AppError("Invalid or missing todo id", 400);
 
     await todoService.deleteTodo(id);
-    sendSuccess(res, {}, 204, {}, "Todo deleted successfully");
+    sendSuccess(res, {}, 200, {}, "Todo deleted successfully");
   },
 );
 

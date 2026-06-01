@@ -2,15 +2,37 @@
 
 .todo {
   width: 100%;
+  height: 100%;
   display: flex;
   padding: 0 24px;
+
+  &:hover &__actions {
+    opacity: 1;
+  }
 
   &__info {
     flex: 1;
     @include flex-gap(24px);
+    align-items: center;
+    font: $text-preset-1;
+    color: var(--todo-color);
   }
 
   &__actions {
-    @include flex-gap(8px);
+    opacity: 0;
+    @include flex-gap(12px);
+    align-items: center;
+  }
+
+  &__action {
+    cursor: pointer;
+
+    &--edit {
+      svg {
+        width: 21px;
+        height: 21px;
+        stroke: #393a4b;
+      }
+    }
   }
 }
