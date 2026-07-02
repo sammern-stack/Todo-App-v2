@@ -2,6 +2,8 @@ import { Button } from "../";
 import { useTodosStore } from "../../stores";
 import "./CreateTodo.scss";
 
+type InputEvent = React.ChangeEvent<HTMLInputElement>;
+
 export const CreateTodo = () => {
   const newTodo = useTodosStore((s) => s.newTodo);
   const setNewTodo = useTodosStore((s) => s.setNewTodo);
@@ -12,17 +14,25 @@ export const CreateTodo = () => {
     setNewTodo("");
   };
 
+  const handleCreateTodo = (e: InputEvent) => setNewTodo(e.target.value);
+
   return (
-    <div className="create-todo">
-      <Button role="create" onClick={handleNewTodo} />
+    <form
+      className="create-todo"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleNewTodo();
+      }}
+    >
+      <Button type="submit" role="create" onClick={handleNewTodo} />
 
       <input
         type="text"
         className="create-todo__input"
         placeholder="Create a new todo..."
         value={newTodo}
-        onChange={({ target }) => setNewTodo(target.value)}
+        onChange={handleCreateTodo}
       />
-    </div>
+    </form>
   );
 };
