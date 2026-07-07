@@ -1,9 +1,12 @@
 // ——— Imports —————————————————————————————————————————————————————————————————————————————————————
 import express from "express";
 import cors from "cors";
+
+import apiRouters from "@/routes/api.route.js";
+import authRoutes from "@/routes/auth.route.js";
+
 import { errorHandler } from "@/shared/middleware/errorHandler.js";
 import { corsOptions } from "@/config/corsOptions.js";
-import todoRouters from "@/features/Todo/todo.route.js";
 
 const app = express();
 
@@ -13,7 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // ——— Routes ——————————————————————————————————————————————————————————————————————————————————————
-app.use("/api/todos", todoRouters);
+app.use("/api", apiRouters);
+app.use("/auth", authRoutes);
 
 app.use(errorHandler);
 
