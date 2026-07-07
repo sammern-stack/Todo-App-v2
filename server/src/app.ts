@@ -1,9 +1,9 @@
 // ——— Imports —————————————————————————————————————————————————————————————————————————————————————
 import express from "express";
 import cors from "cors";
-import { errorHandler } from "./middleware/errorHandler.js";
-import { corsOptions } from "./config/corsOptions.js";
-import todoRouters from "./routes/todo.route.js";
+import { errorHandler } from "@/shared/middleware/errorHandler.js";
+import { corsOptions } from "@/config/corsOptions.js";
+import todoRouters from "@/features/Todo/todo.route.js";
 
 const app = express();
 

@@ -1,7 +1,8 @@
 import { Schema, model } from "mongoose";
-import type { ITodo } from "../types/index.js";
 
-const todoSchema = new Schema<ITodo>(
+import type { TodoSchema } from "./todo.types.js";
+
+const todoSchema = new Schema<TodoSchema>(
   {
     title: {
       type: String,
@@ -13,10 +14,8 @@ const todoSchema = new Schema<ITodo>(
       default: "incomplete",
     },
   },
-  {
-    timestamps: true,
-  },
+  { timestamps: true },
 );
 
-const Todo = model<ITodo>("todo", todoSchema);
+const Todo = model<TodoSchema>("todo", todoSchema);
 export default Todo;
