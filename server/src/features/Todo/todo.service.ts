@@ -3,7 +3,7 @@ import Todo from "./Todo.model.js";
 
 import { queryOptions } from "@/config/mongoose.js";
 
-import { AppError } from "@/shared/utils/AppError.js";
+import { AppError } from "@/shared/utils/customErrors.js";
 import { isMongooseId } from "@/shared/utils/validators.js";
 
 import type {

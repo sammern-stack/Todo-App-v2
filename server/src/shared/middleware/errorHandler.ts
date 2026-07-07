@@ -1,47 +1,37 @@
-//—————————————————————————————————————————————————————————————————
-// Imports
-//—————————————————————————————————————————————————————————————————
-
+// ——— Imports —————————————————————————————————————————————————————————————————————————————————————
 import type { Request, Response, NextFunction } from "express";
-import { AppError } from "@/shared/utils/AppError.js";
+import { NODE_ENV } from "@/config/env.js";
+import { AppError } from "@/shared/utils/customErrors.js";
 
-//—————————————————————————————————————————————————————————————————
-// Types
-//—————————————————————————————————————————————————————————————————
+// ——— Helpers —————————————————————————————————————————————————————————————————————————————————————
+const errorResponse = (
+  res: Response,
+  statusCode: number = 500,
+  message: string,
+) => {
+  const error = { ok: false, message };
+  res.status(statusCode).json(error);
+};
 
-type TErrorHandler = (
+// ——— Error Handlers ——————————————————————————————————————————————————————————————————————————————
+export const errorHandler = (
   error: unknown,
   req: Request,
   res: Response,
   next: NextFunction,
-) => void;
-// All for parameters are required to let the Express know that its for error handing
-
-//—————————————————————————————————————————————————————————————————
-// Helper
-//—————————————————————————————————————————————————————————————————
-
-const createErrObj = (message: string): object => ({ ok: false, message });
-
-//—————————————————————————————————————————————————————————————————
-// Error Handler
-//—————————————————————————————————————————————————————————————————
-
-export const errorHandler: TErrorHandler = (error, req, res, next) => {
-  // Errors thrown using AppError.ts
+): void => {
   if (error instanceof AppError) {
-    const { statusCode, message } = error;
-    res.status(statusCode).json(createErrObj(message));
+    errorResponse(res, error.statusCode, error.message);
     return;
   }
 
-  // Catch Unknown Errors
+  // Fallback for unknown errors
   console.log(`Unexpected Error: ${error}`);
   const message =
-    process.env.NODE_ENV === "production"
+    NODE_ENV === "production"
       ? "Something when wrong"
       : error instanceof Error
         ? error.message
         : "Unknown Error";
-  res.status(500).json(createErrObj(message));
+  errorResponse(res, 500, message);
 };

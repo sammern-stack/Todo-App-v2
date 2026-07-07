@@ -1,23 +1,7 @@
-//—————————————————————————————————————————————————————————————————
-// Imports
-//—————————————————————————————————————————————————————————————————
+import type { RequestHandler, Request, Response, NextFunction } from "express";
 
-import type { Request, Response, NextFunction, RequestHandler } from "express";
-
-//—————————————————————————————————————————————————————————————————
-// Types
-//—————————————————————————————————————————————————————————————————
-
-type TAsyncHandler = (
-  fn: RequestHandler,
-) => (req: Request, res: Response, next: NextFunction) => void;
-
-//—————————————————————————————————————————————————————————————————
-// Async Handler
-//—————————————————————————————————————————————————————————————————
-
-export const asyncHandler: TAsyncHandler = (fn) => {
-  return (req, res, next) => {
+export const asyncHandler = (fn: RequestHandler) => {
+  return (req: Request, res: Response, next: NextFunction) => {
     Promise.resolve(fn(req, res, next)).catch(next);
   };
 };
