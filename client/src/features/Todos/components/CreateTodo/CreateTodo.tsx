@@ -1,10 +1,7 @@
 import { Button } from "@/shared/components";
-import type {
-  FormChangeEvent,
-  InputChangeEvent,
-} from "@/shared/types/react.types";
-import { useTodosStore } from "../../stores";
-import "./CreateTodo.scss";
+import type { InputChangeEvent } from "@/shared/types/react.types";
+import { useTodosStore } from "@/stores";
+import styles from "./CreateTodo.module.scss";
 
 export const CreateTodo = () => {
   const newTodo = useTodosStore((s) => s.newTodo);
@@ -18,22 +15,22 @@ export const CreateTodo = () => {
 
   const handleCreateTodo = (e: InputChangeEvent) => setNewTodo(e.target.value);
 
-  const handleSubmit = (e: FormChangeEvent) => {
-    e.preventDefault();
-    handleNewTodo();
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") handleNewTodo();
   };
 
   return (
-    <form className="create-todo" onSubmit={handleSubmit}>
-      <Button type="submit" role="create" onClick={handleNewTodo} />
+    <div className={styles["create-todo"]}>
+      <Button role="create" onClick={handleNewTodo} />
 
       <input
         type="text"
-        className="create-todo__input"
+        className={styles["create-todo__input"]}
         placeholder="Create a new todo..."
         value={newTodo}
         onChange={handleCreateTodo}
+        onKeyDown={handleKeyDown}
       />
-    </form>
+    </div>
   );
 };

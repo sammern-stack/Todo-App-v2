@@ -1,12 +1,12 @@
 import styles from "./TodosContent.module.scss";
-import { CreateTodo, TodosList } from "@/components";
+import { TodoList } from "@/features/Todos/components";
+import { CreateTodo } from "@/features/Todos/components";
 
 export const TodosContent = () => {
   return (
     <div className={styles.todosContent}>
       <CreateTodo />
-
-      <TodosList />
+      <TodoList />
     </div>
   );
 };
