@@ -1,5 +1,4 @@
-import { useTodosStore } from "../../../../stores";
-
+import { useDeleteTodo, useUpdateTodo } from "@/features/Todos";
 import { Button } from "@/shared/components";
 
 import type { TodoSchema } from "@/shared/types/todo.types";
@@ -12,8 +11,17 @@ interface TodoItemProps {
 }
 
 export const TodoItem = ({ todo }: TodoItemProps) => {
-  const deleteTodo = useTodosStore((s) => s.deleteTodo);
-  const toggleTodoState = useTodosStore((s) => s.toggleTodoState);
+  const { mutate: deleteTodo } = useDeleteTodo();
+  const { mutate: updateTodo } = useUpdateTodo();
+
+  const handleToggleTodoState = () => {
+    updateTodo({
+      todoId: todo._id,
+      updates: {
+        stage: todo.stage === "completed" ? "incomplete" : "completed",
+      },
+    });
+  };
 
   return (
     <div
@@ -23,7 +31,7 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
         <Button
           role="todo"
           isChecked={todo.stage === "completed"}
-          onClick={() => toggleTodoState(todo._id)}
+          onClick={handleToggleTodoState}
         />
         <span>{todo.title}</span>
       </div>

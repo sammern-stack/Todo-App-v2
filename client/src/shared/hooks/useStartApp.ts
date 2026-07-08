@@ -4,7 +4,7 @@
 
 import { useEffect } from "react";
 
-import { useThemeStore, useTodosStore } from "../../stores";
+import { useThemeStore } from "../../stores";
 
 //—————————————————————————————————————————————————————————————————
 // Start App hook
@@ -13,17 +13,8 @@ import { useThemeStore, useTodosStore } from "../../stores";
 export const useStartApp = () => {
   const theme = useThemeStore((s) => s.theme);
 
-  const setTodos = useTodosStore((s) => s.setTodos);
-  const setTodosLeft = useTodosStore((s) => s.setTodosLeft);
-
   // Set theme on mount from localStorage
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
-
-  useEffect(() => {
-    setTodos();
-    setTodosLeft();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 };

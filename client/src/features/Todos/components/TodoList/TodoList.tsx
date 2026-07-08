@@ -1,4 +1,6 @@
 import { useTodosStore } from "@/stores";
+import React from "react";
+import { useClearTodos, useTodos } from "@/features/Todos";
 import type { Filter } from "@/stores/useTodosStore";
 
 import { TodoItem } from "../TodoItem/TodoItem";
@@ -6,19 +8,37 @@ import { TodoItem } from "../TodoItem/TodoItem";
 import styles from "./TodoList.module.scss";
 
 export const TodoList = () => {
-  const todos = useTodosStore((s) => s.todos);
-  const todosLeft = useTodosStore((s) => s.todosLeft);
-  const clearTodos = useTodosStore((s) => s.clearTodos);
+  const { mutate: clearTodos } = useClearTodos();
+  const filter = useTodosStore((s) => s.filter);
+  const setFilter = useTodosStore((s) => s.setFilter);
+
+  const { data: todos = [], isLoading, error } = useTodos();
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "Active") return todo.stage === "incomplete";
+    if (filter === "Completed") return todo.stage === "completed";
+    return true;
+  });
+
+  const todosLeft = todos.filter((todo) => todo.stage === "incomplete").length;
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error)
+    return (
+      <div>
+        Error: {error instanceof Error ? error.message : "Unknown error"}
+      </div>
+    );
 
   return (
     <div className={styles.todos}>
       <div className={styles.todos__content}>
         <div className={styles.todos__list}>
-          {todos.map((todo) => (
-            <>
+          {filteredTodos.map((todo) => (
+            <React.Fragment key={todo._id}>
               <TodoItem todo={todo} />
               <div className={styles.todos__divider}></div>
-            </>
+            </React.Fragment>
           ))}
         </div>
 
@@ -28,9 +48,13 @@ export const TodoList = () => {
           </div>
 
           <div className={styles.todos__filters}>
-            <FilterItem label="All" />
-            <FilterItem label="Active" />
-            <FilterItem label="Completed" />
+            <FilterItem label="All" filter={filter} setFilter={setFilter} />
+            <FilterItem label="Active" filter={filter} setFilter={setFilter} />
+            <FilterItem
+              label="Completed"
+              filter={filter}
+              setFilter={setFilter}
+            />
           </div>
 
           <div
@@ -49,13 +73,17 @@ export const TodoList = () => {
 // Helper
 //—————————————————————————————————————————————————————————————————
 
-const FilterItem = ({ label }: { label: Filter }) => {
-  const filter = useTodosStore((s) => s.filter);
-  const setFilter = useTodosStore((s) => s.setFilter);
-
-  const handleSelectFilter = (filter: Filter) => {
-    setFilter(filter);
-  };
+const FilterItem = ({
+  label,
+  filter,
+  setFilter,
+}: {
+  label: Filter;
+  filter: Filter;
+  setFilter: (filter: Filter) => void;
+}) => {
+  const handleSelectFilter = (currentFilter: Filter) =>
+    setFilter(currentFilter);
 
   return (
     <div

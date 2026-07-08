@@ -1,4 +1,5 @@
 import { Button } from "@/shared/components";
+import { useCreateTodo } from "@/features/Todos";
 import type { InputChangeEvent } from "@/shared/types/react.types";
 import { useTodosStore } from "@/stores";
 import styles from "./CreateTodo.module.scss";
@@ -6,10 +7,12 @@ import styles from "./CreateTodo.module.scss";
 export const CreateTodo = () => {
   const newTodo = useTodosStore((s) => s.newTodo);
   const setNewTodo = useTodosStore((s) => s.setNewTodo);
-  const createTodo = useTodosStore((s) => s.createTodo);
+  // const createTodo = useTodosStore((s) => s.createTodo);
+
+  const { mutate: createTodo } = useCreateTodo();
 
   const handleNewTodo = () => {
-    createTodo(newTodo);
+    createTodo({ title: newTodo });
     setNewTodo("");
   };
 
