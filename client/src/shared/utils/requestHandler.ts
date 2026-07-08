@@ -11,20 +11,13 @@ type SuccessResponse<D> = {
   meta: Record<string, unknown>;
 };
 
-type ErrorResponse<E = AxiosError> = {
-  ok: false;
-  error?: E;
-};
-
-type BaseResponse<D, E> = Promise<SuccessResponse<D> | ErrorResponse<E>>;
-
 export const requestHandler =
   <D, P = void, E = AxiosError>(request: BaseRequest<D, P>) =>
-  async (params?: P): BaseResponse<D, E> => {
+  async (params?: P): Promise<D> => {
     try {
       const res = await request(params);
-      return res.data;
+      return res.data.data;
     } catch (error) {
-      return { ok: false, error: error as E };
+      throw error as E;
     }
   };

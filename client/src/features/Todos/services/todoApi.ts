@@ -11,13 +11,13 @@ const BASE_URL = "/api/todos";
 
 export const todoApi = {
   getAll: (filters?: TodoFilters) =>
-    requestHandler<TodoSchema[], TodoFilters>(() =>
+    requestHandler<TodoSchema[], TodoFilters>((params) =>
       api({
         url: BASE_URL,
         method: "GET",
-        params: filters,
+        params,
       }),
-    )(),
+    )(filters),
 
   getOne: (todoId: string) =>
     requestHandler<TodoSchema>(() =>

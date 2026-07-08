@@ -47,10 +47,7 @@ export const useTodosStore = create<TodosStore>((set, get) => ({
   },
 
   fetchTodos: async (filter) => {
-    const todos = await todoApi.getAll(filter ? { stage: filter } : undefined);
-    if (!todos.ok)
-      throw new Error(todos.error?.message || "Failed to fetch todos");
-    return todos.data;
+    return await todoApi.getAll(filter ? { stage: filter } : undefined);
   },
 
   syncTodos: async () => {
@@ -68,37 +65,51 @@ export const useTodosStore = create<TodosStore>((set, get) => ({
   },
 
   createTodo: async (todo) => {
-    const res = await todoApi.create({ title: todo });
-    if (!res.ok)
-      return console.log(res.error?.message || "Failed to create todo");
-    await get().syncTodos();
+    try {
+      await todoApi.create({ title: todo });
+      await get().syncTodos();
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Failed to create todo";
+      console.log(message);
+    }
   },
 
   deleteTodo: async (id) => {
-    const res = await todoApi.delete(id);
-    if (!res.ok)
-      return console.log(res.error?.message || "Failed to delete todo");
-    await get().syncTodos();
+    try {
+      await todoApi.delete(id);
+      await get().syncTodos();
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Failed to delete todo";
+      console.log(message);
+    }
   },
 
   toggleTodoState: async (id: string) => {
-    const todo = await todoApi.getOne(id);
-    if (!todo.ok)
-      return console.log(todo.error?.message || "Failed to fetch todo");
+    try {
+      const todo = await todoApi.getOne(id);
 
-    const res = await todoApi.update(id, {
-      stage: todo.data.stage === "completed" ? "incomplete" : "completed",
-    });
-    if (!res.ok)
-      return console.log(res.error?.message || "Failed to update todo");
+      await todoApi.update(id, {
+        stage: todo.stage === "completed" ? "incomplete" : "completed",
+      });
 
-    await get().syncTodos();
+      await get().syncTodos();
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Failed to update todo";
+      console.log(message);
+    }
   },
 
   clearTodos: async () => {
-    const res = await todoApi.clear();
-    if (!res.ok)
-      return console.log(res.error?.message || "Failed to clear todos");
-    await get().syncTodos();
+    try {
+      await todoApi.clear();
+      await get().syncTodos();
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Failed to clear todos";
+      console.log(message);
+    }
   },
 }));
