@@ -1,0 +1,7 @@
+@use "../../styles/mixins" as *;
+
+.todosContent {
+  flex: 1;
+  @include flex-gap(24px, column);
+  min-height: 0;
+}
