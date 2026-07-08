@@ -1,35 +1,27 @@
-//—————————————————————————————————————————————————————————————————
-// Imports
-//—————————————————————————————————————————————————————————————————
-
 import { api, apiCall } from "./axios";
-import type { ITodo, RequestFn, TStage } from "../types";
+import type {
+  TodoSchema,
+  TodoFilters,
+  TodoCreateBody,
+  TodoUpdateBody,
+} from "@/shared/types/todo.types";
+import type { RequestFn } from "@/shared/types/axios.types";
 
-//—————————————————————————————————————————————————————————————————
-// Types
-//—————————————————————————————————————————————————————————————————
+export const getTodosRequest = async (
+  filter?: TodoFilters,
+): RequestFn<TodoSchema[]> => apiCall(() => api.get("/", { params: filter }));
 
-export type TCreateTodo = Pick<ITodo, "title">;
-
-//—————————————————————————————————————————————————————————————————
-// Requests
-//—————————————————————————————————————————————————————————————————
-
-export const getTodosRequest = async (filter?: {
-  stage: TStage;
-}): RequestFn<ITodo[]> => apiCall(() => api.get("/", { params: filter }));
-
-export const getTodoRequest = async (id: string): RequestFn<ITodo> =>
+export const getTodoRequest = async (id: string): RequestFn<TodoSchema> =>
   apiCall(() => api.get(`/${id}`));
 
 export const createTodoRequest = async (
-  todo: TCreateTodo,
-): RequestFn<TCreateTodo> => apiCall(() => api.post("/", todo));
+  todo: TodoCreateBody,
+): RequestFn<TodoCreateBody> => apiCall(() => api.post("/", todo));
 
 export const updateTodoRequest = async (
   id: string,
-  updates: Partial<ITodo>,
-): RequestFn<Partial<ITodo>> => apiCall(() => api.put(`/${id}`, updates));
+  updates: TodoUpdateBody,
+): RequestFn<TodoUpdateBody> => apiCall(() => api.put(`/${id}`, updates));
 
 export const deleteTodoRequest = (id: string): RequestFn<void> =>
   apiCall(() => api.delete(`/${id}`));

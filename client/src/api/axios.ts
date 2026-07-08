@@ -1,13 +1,5 @@
-//—————————————————————————————————————————————————————————————————
-// Imports
-//—————————————————————————————————————————————————————————————————
-
 import axios from "axios";
-import type { AxiosFn, RequestFn } from "../types";
-
-//—————————————————————————————————————————————————————————————————
-// Axios Utility function
-//—————————————————————————————————————————————————————————————————
+import type { AxiosFn, RequestFn } from "@/shared/types/axios.types";
 
 export const api = axios.create({ baseURL: "http://localhost:3001/api/todos" });
 

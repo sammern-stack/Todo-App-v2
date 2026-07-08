@@ -4,7 +4,7 @@
 
 import { useTodosStore } from "../../stores";
 
-import { Button } from "../Button/Button";
+import { Button } from "@/shared/components";
 
 import type { ITodo } from "../../types";
 
