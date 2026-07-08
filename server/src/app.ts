@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 
 import apiRouters from "@/routes/api.route.js";
-import authRoutes from "@/routes/auth.route.js";
+import authRoutes from "@/features/Auth/auth.route.js";
 
 import { errorHandler } from "@/shared/middleware/errorHandler.js";
 import { corsOptions } from "@/config/corsOptions.js";
