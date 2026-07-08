@@ -1,5 +1,5 @@
-import { useTodosStore } from "@/stores";
 import React from "react";
+import { useTodosStore } from "@/stores";
 import { useClearTodos, useTodos } from "@/features/Todos";
 import type { Filter } from "@/stores/useTodosStore";
 
@@ -12,7 +12,7 @@ export const TodoList = () => {
   const filter = useTodosStore((s) => s.filter);
   const setFilter = useTodosStore((s) => s.setFilter);
 
-  const { data: todos = [], isLoading, error } = useTodos();
+  const { data: todos = [] } = useTodos();
 
   const filteredTodos = todos.filter((todo) => {
     if (filter === "Active") return todo.stage === "incomplete";
@@ -21,14 +21,6 @@ export const TodoList = () => {
   });
 
   const todosLeft = todos.filter((todo) => todo.stage === "incomplete").length;
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error)
-    return (
-      <div>
-        Error: {error instanceof Error ? error.message : "Unknown error"}
-      </div>
-    );
 
   return (
     <div className={styles.todos}>

@@ -1,36 +1,34 @@
+import styles from "./TodoItem.module.scss";
 import { useDeleteTodo, useUpdateTodo } from "@/features/Todos";
 import { Button } from "@/shared/components";
-
+import cross from "@/assets/icon-cross.svg";
 import type { TodoSchema } from "@/shared/types/todo.types";
 
-import cross from "@/assets/icon-cross.svg";
-import styles from "./TodoItem.module.scss";
-
-interface TodoItemProps {
-  todo: TodoSchema;
-}
-
-export const TodoItem = ({ todo }: TodoItemProps) => {
+export const TodoItem = ({ todo }: { todo: TodoSchema }) => {
   const { mutate: deleteTodo } = useDeleteTodo();
   const { mutate: updateTodo } = useUpdateTodo();
 
-  const handleToggleTodoState = () => {
+  const isCompleted = todo.stage === "completed";
+
+  const handleToggleTodoState = () =>
     updateTodo({
       todoId: todo._id,
       updates: {
-        stage: todo.stage === "completed" ? "incomplete" : "completed",
+        stage: isCompleted ? "incomplete" : "completed",
       },
     });
-  };
+
+  const todoClasses = [
+    styles.todo,
+    isCompleted ? styles["todo--completed"] : "",
+  ].join(" ");
 
   return (
-    <div
-      className={`${styles.todo} ${todo.stage === "completed" ? styles["todo--completed"] : ""}`}
-    >
+    <div className={todoClasses}>
       <div className={styles.todo__info}>
         <Button
           role="todo"
-          isChecked={todo.stage === "completed"}
+          isChecked={isCompleted}
           onClick={handleToggleTodoState}
         />
         <span>{todo.title}</span>
