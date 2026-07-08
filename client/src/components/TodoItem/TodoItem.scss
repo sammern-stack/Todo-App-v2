@@ -1,4 +1,4 @@
-@use "../../styles/globals" as *;
+@use "../../styles/mixins" as *;
 
 .todo {
   width: 100%;
@@ -19,7 +19,7 @@
     flex: 1;
     @include flex-gap(24px);
     align-items: center;
-    font: $text-preset-1;
+    font: var(--text-preset-1);
   }
 
   &__actions {

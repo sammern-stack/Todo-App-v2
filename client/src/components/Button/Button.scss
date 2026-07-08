@@ -1,4 +1,4 @@
-@use "../../styles/globals" as *;
+@use "../../styles/mixins" as *;
 
 .button {
   position: relative;
@@ -12,7 +12,7 @@
 
   &--hasHover:hover,
   &--checked {
-    background: $gradient-1;
+    background: var(--gradient-1);
   }
 
   &--empty-state {

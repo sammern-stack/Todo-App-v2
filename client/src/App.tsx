@@ -1,45 +1,22 @@
-//—————————————————————————————————————————————————————————————————
-// Imports
-//—————————————————————————————————————————————————————————————————
-
+import { Suspense, lazy } from "react";
+import { Routes, Route } from "react-router";
 import { useStartApp } from "./hooks/useStartApp";
 
-import {
-  ThemeSwitch,
-  BackgroundImage,
-  CreateTodo,
-  TodosList,
-} from "./components";
+const HomePage = lazy(() => import("./pages/Home/Home"));
+const NotFoundPage = lazy(() => import("./pages/NotFound/NotFound"));
 
 import "./App.scss";
-
-//—————————————————————————————————————————————————————————————————
-// App Component
-//—————————————————————————————————————————————————————————————————
 
 const App = () => {
   useStartApp();
 
   return (
-    <div className="todo-app">
-      <BackgroundImage />
-
-      <div className="todo-app__content">
-        <div className="todo-app__header">
-          <div className="todo-app__title">TODO</div>
-
-          <ThemeSwitch />
-        </div>
-
-        <div className="todo-app__body">
-          <CreateTodo />
-
-          <TodosList />
-
-          <div className="todo-app__footer"></div>
-        </div>
-      </div>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Suspense>
   );
 };
 
