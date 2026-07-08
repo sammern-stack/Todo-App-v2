@@ -4,7 +4,7 @@
 
 import { useEffect } from "react";
 
-import { useThemeStore, useTodosStore } from "../stores";
+import { useThemeStore, useTodosStore } from "../../stores";
 
 //—————————————————————————————————————————————————————————————————
 // Start App hook

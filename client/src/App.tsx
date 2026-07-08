@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router";
-import { useStartApp } from "@/hooks/useStartApp";
+import { useStartApp } from "@/shared/hooks/useStartApp";
 
 const HomePage = lazy(() => import("@/pages/Home/Home"));
 const NotFoundPage = lazy(() => import("@/pages/NotFound/NotFound"));
