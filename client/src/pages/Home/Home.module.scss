@@ -1,17 +1,7 @@
 @use "../../shared/styles/mixins" as *;
 
-.todos {
-  flex: 1;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-
-  &__content {
-    height: 800px;
-    @include absolute-center;
-    @include flex-gap(24px, column);
-    min-height: 0;
-    width: min(541px, 95%);
-  }
+.home {
+  height: 800px;
+  @include flex-gap(24px, column);
+  width: min(541px, 95%);
 }

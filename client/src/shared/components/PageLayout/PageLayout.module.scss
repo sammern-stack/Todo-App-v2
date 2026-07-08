@@ -1,0 +1,14 @@
+@use "../../../shared/styles/mixins" as *;
+
+.pageLayout {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+
+  &__content {
+    @include absolute-center;
+    min-height: 0;
+  }
+}
