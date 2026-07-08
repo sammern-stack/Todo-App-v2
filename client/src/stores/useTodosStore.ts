@@ -1,26 +1,11 @@
-//—————————————————————————————————————————————————————————————————
-// Imports
-//—————————————————————————————————————————————————————————————————
-
 import { create } from "zustand";
-import {
-  clearTodosRequest,
-  createTodoRequest,
-  deleteTodoRequest,
-  getTodoRequest,
-  getTodosRequest,
-  updateTodoRequest,
-} from "../api/todoApi";
-import type { ITodo, TStage } from "../types";
-
-//—————————————————————————————————————————————————————————————————
-// Types
-//—————————————————————————————————————————————————————————————————
+import { todoApi } from "@/features/Todos/services/todoApi";
+import type { TodoSchema, TodoStage } from "@/shared/types/todo.types";
 
 export type Filter = "All" | "Completed" | "Active";
 
 interface TodosStore {
-  todos: ITodo[];
+  todos: TodoSchema[];
   todosLeft: number;
 
   newTodo: string;
@@ -30,11 +15,11 @@ interface TodosStore {
   setFilter: (filter: Filter) => void;
 
   // Helpers
-  fetchTodos: (filter?: TStage) => Promise<ITodo[]>;
+  fetchTodos: (filter?: TodoStage) => Promise<TodoSchema[]>;
   syncTodos: () => Promise<void>;
 
   // Actions
-  setTodos: (filter?: TStage) => Promise<void>;
+  setTodos: (filter?: TodoStage) => Promise<void>;
   setTodosLeft: () => void;
   createTodo: (todo: string) => Promise<void>;
   deleteTodo: (id: string) => Promise<void>;
@@ -62,8 +47,9 @@ export const useTodosStore = create<TodosStore>((set, get) => ({
   },
 
   fetchTodos: async (filter) => {
-    const todos = await getTodosRequest(filter ? { stage: filter } : undefined);
-    if (!todos.ok) throw new Error(todos.message);
+    const todos = await todoApi.getAll(filter ? { stage: filter } : undefined);
+    if (!todos.ok)
+      throw new Error(todos.error?.message || "Failed to fetch todos");
     return todos.data;
   },
 
@@ -82,31 +68,37 @@ export const useTodosStore = create<TodosStore>((set, get) => ({
   },
 
   createTodo: async (todo) => {
-    const res = await createTodoRequest({ title: todo });
-    if (!res.ok) return console.log(res.message);
+    const res = await todoApi.create({ title: todo });
+    if (!res.ok)
+      return console.log(res.error?.message || "Failed to create todo");
     await get().syncTodos();
   },
 
   deleteTodo: async (id) => {
-    const res = await deleteTodoRequest(id);
-    if (!res.ok) return console.log(res.message);
+    const res = await todoApi.delete(id);
+    if (!res.ok)
+      return console.log(res.error?.message || "Failed to delete todo");
     await get().syncTodos();
   },
 
   toggleTodoState: async (id: string) => {
-    const todo = await getTodoRequest(id);
-    if (!todo.ok) return console.log(todo.message);
+    const todo = await todoApi.getOne(id);
+    if (!todo.ok)
+      return console.log(todo.error?.message || "Failed to fetch todo");
 
-    await updateTodoRequest(id, {
+    const res = await todoApi.update(id, {
       stage: todo.data.stage === "completed" ? "incomplete" : "completed",
     });
+    if (!res.ok)
+      return console.log(res.error?.message || "Failed to update todo");
 
     await get().syncTodos();
   },
 
   clearTodos: async () => {
-    const res = await clearTodosRequest();
-    if (!res.ok) return console.log(res.message);
+    const res = await todoApi.clear();
+    if (!res.ok)
+      return console.log(res.error?.message || "Failed to clear todos");
     await get().syncTodos();
   },
 }));
