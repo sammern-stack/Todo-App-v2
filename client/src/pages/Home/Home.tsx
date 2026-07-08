@@ -1,11 +1,11 @@
 import styles from "./Home.module.scss";
 import { HomeFooter, HomeHeader, TodosContent } from "@/layout";
-import { BackgroundImage } from "@/components";
+import { PageBackground } from "@/shared/components";
 
 const Home = () => {
   return (
     <div className={styles.todos}>
-      <BackgroundImage />
+      <PageBackground />
 
       <div className={styles.todos__content}>
         <HomeHeader />
