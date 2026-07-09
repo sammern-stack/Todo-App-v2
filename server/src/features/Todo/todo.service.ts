@@ -9,7 +9,6 @@ import { searchDocument } from "@/shared/utils/searchDocument.js";
 import type {
   TodoStage,
   TodoFilters,
-  TodoQuery,
   TodoCreateBody,
   TodoUpdateBody,
 } from "./todo.types.js";
