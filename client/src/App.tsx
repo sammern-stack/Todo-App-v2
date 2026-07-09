@@ -1,12 +1,17 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route } from "react-router";
-import { useStartApp } from "@/shared/hooks/useStartApp";
+import { useThemeStore } from "./stores";
 
 const HomePage = lazy(() => import("@/pages/Home/Home"));
 const NotFoundPage = lazy(() => import("@/pages/NotFound/NotFound"));
 
 const App = () => {
-  useStartApp();
+  const theme = useThemeStore((s) => s.theme);
+
+  // Set theme on mount from localStorage
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
