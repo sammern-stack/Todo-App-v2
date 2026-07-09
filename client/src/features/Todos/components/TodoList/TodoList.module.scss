@@ -13,22 +13,3 @@
     display: none;
   }
 }
-
-// .todos {
-//   &__list {
-//     flex: 1;
-//     @include flex-gap(24px, column);
-//     min-height: 0;
-//     overflow-y: auto;
-
-//     &::-webkit-scrollbar {
-//       display: none;
-//     }
-//   }
-
-//   &__divider {
-//     width: 100%;
-//     min-height: 1px;
-//     background: var(--color-purple-800);
-//   }
-// }

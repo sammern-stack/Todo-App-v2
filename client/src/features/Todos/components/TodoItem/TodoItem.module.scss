@@ -10,7 +10,7 @@
   border-radius: 5px;
 
   &:hover,
-  &:hover > div > button > div {
+  &:hover > button > div {
     background-color: var(--todo-hover);
   }
 
