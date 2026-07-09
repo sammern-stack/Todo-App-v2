@@ -1,10 +1,18 @@
 @use "../../../../shared/styles/mixins" as *;
 
 .todo {
-  width: 100%;
-  display: flex;
-  padding: 0 24px;
+  @include flex-gap(24px);
+  align-items: center;
+  font: var(--text-preset-1);
+  padding: 24px;
   color: var(--todo-color);
+  border: 1px solid var(--color-purple-800);
+  border-radius: 5px;
+
+  &:hover,
+  &:hover > div > button > div {
+    background-color: var(--todo-hover);
+  }
 
   &--completed {
     text-decoration: line-through;
@@ -15,28 +23,14 @@
     opacity: 1;
   }
 
-  &__info {
+  &__title {
     flex: 1;
-    @include flex-gap(24px);
-    align-items: center;
-    font: var(--text-preset-1);
+    text-align: left;
   }
 
   &__actions {
     opacity: 0;
     @include flex-gap(12px);
     align-items: center;
-  }
-
-  &__action {
-    cursor: pointer;
-
-    &--edit {
-      svg {
-        width: 21px;
-        height: 21px;
-        stroke: #393a4b;
-      }
-    }
   }
 }

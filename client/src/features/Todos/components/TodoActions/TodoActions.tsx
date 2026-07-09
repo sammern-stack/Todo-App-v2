@@ -8,14 +8,19 @@ export const TodoActions = () => {
   const todosLeft = todos.filter((todo) => todo.stage === "incomplete").length;
 
   return (
-    <div className={styles.todos__actions}>
-      <div className={styles["todos__items-left"]}>{todosLeft} items left</div>
+    <div className={styles.todosActions}>
+      <div className={styles["todosActions__items-left"]}>
+        {todosLeft} items left
+      </div>
 
       <TodoFilters />
 
-      <div className={styles["todos__clear-all"]} onClick={() => clearTodos()}>
+      <button
+        className={styles["todosActions__clear-all"]}
+        onClick={() => clearTodos()}
+      >
         Clear completed
-      </div>
+      </button>
     </div>
   );
 };

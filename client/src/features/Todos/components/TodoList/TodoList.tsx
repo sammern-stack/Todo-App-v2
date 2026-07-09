@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./TodoList.module.scss";
 import { useTodosStore } from "@/stores";
 import { useTodos } from "@/features/Todos";
@@ -10,12 +9,9 @@ export const TodoList = () => {
   const { data: todos = [] } = useTodos(getApiFilters(filter));
 
   return (
-    <div className={styles.todos__list}>
+    <div className={styles.todosList}>
       {todos.map((todo) => (
-        <React.Fragment key={todo._id}>
-          <TodoItem todo={todo} />
-          <div className={styles.todos__divider}></div>
-        </React.Fragment>
+        <TodoItem todo={todo} key={todo._id} />
       ))}
     </div>
   );

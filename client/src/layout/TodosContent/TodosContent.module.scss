@@ -1,28 +1,17 @@
 @use "../../shared/styles/mixins" as *;
 
-.todosContent {
+.todos {
   flex: 1;
   @include flex-gap(24px, column);
   min-height: 0;
 
-  &__todos {
+  &__content {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
     min-height: 0;
-    width: 100%;
-    height: 500px;
     background: var(--body-bg);
     box-shadow: var(--box-shadow-1);
-    padding: 24px 0;
     border-radius: 5px;
-  }
-
-  &__todosContent {
-    flex: 1;
-    width: 100%;
-    @include flex-gap(24px, column);
-    min-height: 0;
   }
 }

@@ -35,6 +35,10 @@
 
   // Box shadows
   --box-shadow-1: 0 35px 50px -15px rgb(0 0 0 / 0.5);
+
+  // Todo hover colors
+  --todo-hover-light: #e8e8eb;
+  --todo-hover-dark: #2a2d42;
 }
 
 // Theme based colors
@@ -44,6 +48,7 @@
   --btn-border: var(--color-purple-300);
   --input-color: var(--color-purple-800);
   --todo-color: var(--color-navy-850);
+  --todo-hover: var(--todo-hover-light);
   --todo-completed: var(--color-gray-300);
   --todo-actions: var(--color-gray-600);
   --todo-actions-hover: var(--color-navy-850);
@@ -56,6 +61,7 @@
   --btn-border: var(--color-purple-800);
   --input-color: var(--color-gray-600);
   --todo-color: var(--color-purple-100);
+  --todo-hover: var(--todo-hover-dark);
   --todo-completed: var(--color-purple-700);
   --todo-actions: var(--color-purple-600);
   --todo-actions-hover: var(--color-purple-300);

@@ -4,14 +4,11 @@ import { CreateTodo, TodoActions } from "@/features/Todos";
 
 export const TodosContent = () => {
   return (
-    <div className={styles.todosContent}>
+    <div className={styles.todos}>
       <CreateTodo />
-      <div className={styles.todosContent__todos}>
-        <div className={styles.todosContent__todosContent}>
-          <TodoList />
-
-          <TodoActions />
-        </div>
+      <div className={styles.todos__content}>
+        <TodoList />
+        <TodoActions />
       </div>
     </div>
   );

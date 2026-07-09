@@ -10,13 +10,14 @@ export const TodoItem = ({ todo }: { todo: TodoSchema }) => {
 
   const isCompleted = todo.stage === "completed";
 
-  const handleToggleTodoState = () =>
+  const handleToggleState = () =>
     updateTodo({
       todoId: todo._id,
       updates: {
         stage: isCompleted ? "incomplete" : "completed",
       },
     });
+  const handleDelete = () => deleteTodo(todo._id);
 
   const todoClasses = [
     styles.todo,
@@ -24,24 +25,14 @@ export const TodoItem = ({ todo }: { todo: TodoSchema }) => {
   ].join(" ");
 
   return (
-    <div className={todoClasses}>
-      <div className={styles.todo__info}>
-        <Button
-          role="todo"
-          isChecked={isCompleted}
-          onClick={handleToggleTodoState}
-        />
-        <span>{todo.title}</span>
-      </div>
-
+    <button className={todoClasses} onClick={handleToggleState}>
+      <Button role="todo" isChecked={isCompleted} onClick={handleToggleState} />
+      <p className={styles.todo__title}>{todo.title}</p>
       <div className={styles.todo__actions}>
-        <div
-          className={`${styles.todo__action} ${styles["todo__action--delete"]}`}
-          onClick={() => deleteTodo(todo._id)}
-        >
+        <button className={styles.todo__delete} onClick={handleDelete}>
           <img src={cross} alt="A cross for deleting todos" />
-        </div>
+        </button>
       </div>
-    </div>
+    </button>
   );
 };
