@@ -8,13 +8,6 @@ type ButtonProps = {
 } & BaseButtonProps;
 
 export const Button = ({ role, isChecked, ...props }: ButtonProps) => {
-  const renderContent = () => {
-    if (role === "create" || !isChecked)
-      return <div className={styles["button--empty-state"]}></div>;
-
-    return <img src={check} alt="checkmark for completed todo" />;
-  };
-
   const classes = [
     styles["button"],
     styles[`button--${isChecked ? "checked" : "notChecked"}`],
@@ -22,8 +15,12 @@ export const Button = ({ role, isChecked, ...props }: ButtonProps) => {
   ].join(" ");
 
   return (
-    <button className={classes} {...props}>
-      {renderContent()}
+    <button type="button" className={classes} {...props}>
+      {role === "create" || !isChecked ? (
+        <div className={styles["button--empty-state"]}></div>
+      ) : (
+        <img src={check} alt="checkmark for completed todo" />
+      )}
     </button>
   );
 };
