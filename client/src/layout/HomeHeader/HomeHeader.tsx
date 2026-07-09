@@ -3,9 +3,9 @@ import { ThemeSwitch } from "@/features/Settings";
 
 export const HomeHeader = () => {
   return (
-    <div className={styles.homeHeader}>
-      <div className={styles.homeHeader__title}>TODO</div>
+    <header className={styles.homeHeader}>
+      <h1 className={styles.homeHeader__title}>TODO</h1>
       <ThemeSwitch />
-    </div>
+    </header>
   );
 };
