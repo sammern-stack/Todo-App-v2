@@ -9,10 +9,12 @@ export const TodoList = () => {
   const { data: todos = [] } = useTodos(getApiFilters(filter));
 
   return (
-    <div className={styles.todosList}>
+    <ul className={styles.todosList}>
       {todos.map((todo) => (
-        <TodoItem todo={todo} key={todo._id} />
+        <li>
+          <TodoItem todo={todo} key={todo._id} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
