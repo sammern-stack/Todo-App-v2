@@ -16,7 +16,7 @@ import type {
 export const getTodos = async (filters: TodoFilters) => {
   const query: Record<string, unknown> = {};
   if (filters.stage) query.stage = filters.stage;
-  return Todo.find(query);
+  return Todo.find(query).sort({ createdAt: -1 }).lean();
 };
 
 export const getTodoById = async (id: string) => {
