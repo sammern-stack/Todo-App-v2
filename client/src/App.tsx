@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route } from "react-router";
 import { useThemeStore } from "./stores";
 
+const LoadingPage = lazy(() => import("@/pages/Loading/Loading"));
 const HomePage = lazy(() => import("@/pages/Home/Home"));
 const NotFoundPage = lazy(() => import("@/pages/NotFound/NotFound"));
 
@@ -14,7 +15,7 @@ const App = () => {
   }, [theme]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<LoadingPage />}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={<NotFoundPage />} />
