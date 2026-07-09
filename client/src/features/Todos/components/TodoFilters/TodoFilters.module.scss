@@ -1,0 +1,17 @@
+.filters {
+  display: flex;
+  gap: 8px;
+
+  &__filter {
+    color: inherit;
+
+    &:hover {
+      color: var(--todo-actions-hover);
+    }
+
+    &--active {
+      color: var(--todo-actions-active);
+    }
+  }
+}
+

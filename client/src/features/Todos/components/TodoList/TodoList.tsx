@@ -1,7 +1,7 @@
 import React from "react";
 import { useTodosStore } from "@/stores";
 import { useClearTodos, useTodos } from "@/features/Todos";
-import { TodoFilterItem } from "../TodoFilterItem/TodoFilterItem";
+import { TodoFilters } from "../TodoFilters/TodoFilters";
 
 import { TodoItem } from "../TodoItem/TodoItem";
 
@@ -38,11 +38,7 @@ export const TodoList = () => {
             {todosLeft} items left
           </div>
 
-          <div className={styles.todos__filters}>
-            <TodoFilterItem label="All" />
-            <TodoFilterItem label="Active" />
-            <TodoFilterItem label="Completed" />
-          </div>
+          <TodoFilters />
 
           <div
             className={styles["todos__clear-all"]}

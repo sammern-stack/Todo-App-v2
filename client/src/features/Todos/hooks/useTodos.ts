@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { todoApi } from "../services/todoApi";
-import type { TodoUpdateBody } from "@/shared/types/todo.types";
+import type { TodoFilters, TodoUpdateBody } from "@/shared/types/todo.types";
 
 type CreateTodoParams = Parameters<typeof todoApi.create>[0];
 type UpdateTodoParams = {
@@ -9,10 +9,10 @@ type UpdateTodoParams = {
 };
 type DeleteTodoParams = Parameters<typeof todoApi.delete>[0];
 
-export const useTodos = () => {
+export const useTodos = (filter?: TodoFilters) => {
   return useQuery({
-    queryKey: ["todos"],
-    queryFn: () => todoApi.getAll(),
+    queryKey: ["todos", filter],
+    queryFn: () => todoApi.getAll(filter),
   });
 };
 

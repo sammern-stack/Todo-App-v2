@@ -44,12 +44,7 @@
     font: var(--text-preset-2);
     color: var(--todo-actions);
   }
-
-  &__filters {
-    display: flex;
-    gap: 8px;
-  }
-
+  
   &__clear-all {
     cursor: pointer;
 
