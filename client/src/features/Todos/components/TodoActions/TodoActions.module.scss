@@ -1,0 +1,18 @@
+.todos {
+  &__actions {
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    font: var(--text-preset-2);
+    color: var(--todo-actions);
+  }
+
+  &__clear-all {
+    cursor: pointer;
+
+    &:hover {
+      color: var(--todo-actions-hover);
+    }
+  }
+}
+

@@ -1,6 +1,9 @@
 import { create } from "zustand";
 
 export type Filter = "All" | "Completed" | "Active";
+type ApiFilters = {
+  stage: "incomplete" | "completed";
+};
 
 interface TodosStore {
   newTodo: string;
@@ -8,6 +11,7 @@ interface TodosStore {
 
   filter: Filter;
   setFilter: (filter: Filter) => void;
+  getApiFilters: (filter: Filter) => ApiFilters | undefined;
 }
 
 export const useTodosStore = create<TodosStore>((set) => ({
@@ -16,4 +20,9 @@ export const useTodosStore = create<TodosStore>((set) => ({
 
   filter: "All",
   setFilter: (filter) => set({ filter }),
+  getApiFilters: (filter) => {
+    if (filter === "All") return undefined;
+    const stage = filter === "Active" ? "incomplete" : "completed";
+    return { stage };
+  },
 }));
