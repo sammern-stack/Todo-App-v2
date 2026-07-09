@@ -1,7 +1,7 @@
 import React from "react";
 import { useTodosStore } from "@/stores";
 import { useClearTodos, useTodos } from "@/features/Todos";
-import type { Filter } from "@/stores/useTodosStore";
+import { TodoFilterItem } from "../TodoFilterItem/TodoFilterItem";
 
 import { TodoItem } from "../TodoItem/TodoItem";
 
@@ -10,7 +10,6 @@ import styles from "./TodoList.module.scss";
 export const TodoList = () => {
   const { mutate: clearTodos } = useClearTodos();
   const filter = useTodosStore((s) => s.filter);
-  const setFilter = useTodosStore((s) => s.setFilter);
 
   const { data: todos = [] } = useTodos();
 
@@ -40,13 +39,9 @@ export const TodoList = () => {
           </div>
 
           <div className={styles.todos__filters}>
-            <FilterItem label="All" filter={filter} setFilter={setFilter} />
-            <FilterItem label="Active" filter={filter} setFilter={setFilter} />
-            <FilterItem
-              label="Completed"
-              filter={filter}
-              setFilter={setFilter}
-            />
+            <TodoFilterItem label="All" />
+            <TodoFilterItem label="Active" />
+            <TodoFilterItem label="Completed" />
           </div>
 
           <div
@@ -57,32 +52,6 @@ export const TodoList = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
-};
-
-//—————————————————————————————————————————————————————————————————
-// Helper
-//—————————————————————————————————————————————————————————————————
-
-const FilterItem = ({
-  label,
-  filter,
-  setFilter,
-}: {
-  label: Filter;
-  filter: Filter;
-  setFilter: (filter: Filter) => void;
-}) => {
-  const handleSelectFilter = (currentFilter: Filter) =>
-    setFilter(currentFilter);
-
-  return (
-    <div
-      className={` ${styles.todos__filter} ${filter === label ? styles["todos__filter--active"] : ""}`}
-      onClick={() => handleSelectFilter(label)}
-    >
-      {label}
     </div>
   );
 };
