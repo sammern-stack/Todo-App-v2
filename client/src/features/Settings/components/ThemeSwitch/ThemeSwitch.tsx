@@ -1,8 +1,8 @@
+import styles from "./ThemeSwitch.module.scss";
 import { useThemeStore } from "@/stores/useThemeStore";
 
-import moon from "@/assets/icon-moon.svg";
-import sun from "@/assets/icon-sun.svg";
-import styles from "./ThemeSwitch.module.scss";
+import MoonIcon from "@/assets/icon-moon.svg?react";
+import SunIcon from "@/assets/icon-sun.svg?react";
 
 export const ThemeSwitch = () => {
   const theme = useThemeStore((s) => s.theme);
@@ -10,10 +10,7 @@ export const ThemeSwitch = () => {
 
   return (
     <div className={styles.themeSwitch} onClick={toggleTheme}>
-      <img
-        src={theme === "light" ? sun : moon}
-        alt={`icon for ${theme} theme`}
-      />
+      {theme === "light" ? <SunIcon /> : <MoonIcon />}
     </div>
   );
 };

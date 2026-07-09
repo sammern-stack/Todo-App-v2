@@ -1,5 +1,5 @@
 import styles from "./Button.module.scss";
-import check from "@/assets/icon-check.svg";
+import CheckIcon from "@/assets/icon-check.svg?react";
 import type { BaseButtonProps } from "@/shared/types/react.types";
 
 type ButtonProps = {
@@ -14,12 +14,14 @@ export const Button = ({ role, isChecked, ...props }: ButtonProps) => {
     styles[`button--${!isChecked ? "hasHover" : "noHover"}`],
   ].join(" ");
 
+  const isEmptyState = role === "create" || !isChecked;
+
   return (
     <button type="button" className={classes} {...props}>
-      {role === "create" || !isChecked ? (
+      {isEmptyState ? (
         <div className={styles["button--empty-state"]}></div>
       ) : (
-        <img src={check} alt="checkmark for completed todo" />
+        <CheckIcon />
       )}
     </button>
   );
