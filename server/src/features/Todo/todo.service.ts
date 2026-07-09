@@ -7,7 +7,6 @@ import { AppError } from "@/shared/utils/customErrors.js";
 import { searchDocument } from "@/shared/utils/searchDocument.js";
 
 import type {
-  TodoStage,
   TodoFilters,
   TodoCreateBody,
   TodoUpdateBody,

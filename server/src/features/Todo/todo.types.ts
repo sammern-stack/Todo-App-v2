@@ -1,10 +1,8 @@
 import type { Document } from "mongoose";
 
-export type TodoStage = "completed" | "incomplete";
-
 export type TodoSchema = {
   title: string;
-  stage: TodoStage;
+  stage: "completed" | "incomplete";
 } & Document;
 
 export type TodoFilters = Partial<Pick<TodoSchema, "stage">>;
