@@ -12,12 +12,14 @@ type SuccessResponse<D> = {
 };
 
 export const requestHandler =
-  <D, P = void, E = AxiosError>(request: BaseRequest<D, P>) =>
+  <D, P = void, E extends AxiosError = AxiosError>(
+    request: BaseRequest<D, P>,
+  ) =>
   async (params?: P): Promise<D> => {
     try {
       const res = await request(params);
       return res.data.data;
     } catch (error) {
-      throw error as E;
+      throw (error as E).response?.data;
     }
   };
