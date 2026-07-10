@@ -12,13 +12,15 @@
   transition: all 0.3s ease-in-out;
 
   &--error {
-    border: 1px solid var(--error-color);
-    animation: errorBounce 0.5s ease-in-out;
+    animation:
+      errorBounce 0.5s ease-in-out,
+      errorBorder 2s ease-in-out;
   }
 
   &--success {
-    border: 1px solid var(--success-color);
-    animation: successBounce 0.5s ease-in-out;
+    animation:
+      successBounce 0.5s ease-in-out,
+      successBorder 2s ease-in-out;
   }
 
   &__input {
@@ -78,6 +80,21 @@
   }
 }
 
+@keyframes errorBorder {
+  0% {
+    border: 1px solid var(--error-color);
+  }
+  50% {
+    border: 1px solid var(--error-color);
+  }
+  75% {
+    border: 1px solid var(--error-color);
+  }
+  100% {
+    border: none;
+  }
+}
+
 @keyframes successBounce {
   0% {
     transform: translateY(0);
@@ -87,5 +104,20 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes successBorder {
+  0% {
+    border: 1px solid var(--success-color);
+  }
+  50% {
+    border: 1px solid var(--success-color);
+  }
+  75% {
+    border: 1px solid var(--success-color);
+  }
+  100% {
+    border: none;
   }
 }
