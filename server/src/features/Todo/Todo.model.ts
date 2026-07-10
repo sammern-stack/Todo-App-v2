@@ -7,7 +7,7 @@ const todoSchema = new Schema<TodoSchema>(
     title: {
       type: String,
       required: [true, "Title must be provided"],
-      minLength: [3, "Your todo must be at least 3 characters"],
+      minLength: [3, "Title must be at least 3 characters"],
       set: (value: string) => value.trim(),
     },
     stage: {
