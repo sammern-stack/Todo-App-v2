@@ -16,7 +16,11 @@ export const CreateTodo = () => {
 
   const { mutate: createTodo, error } = useCreateTodo();
 
-  const errorMessage = error?.message.split(":")[2]?.trim();
+  if (error) console.error(JSON.stringify(error, null, 2));
+
+  const errorMessage = error?.message.includes(":")
+    ? error?.message.split(":")[2]?.trim()
+    : error?.message;
 
   const handleNewTodo = () => {
     createTodo({ title: newTodo });
