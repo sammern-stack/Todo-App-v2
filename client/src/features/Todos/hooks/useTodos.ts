@@ -9,16 +9,19 @@ type UpdateTodoParams = {
 };
 type DeleteTodoParams = Parameters<typeof todoApi.delete>[0];
 
+const TODOS_KEY = "todos";
+const TODO_KEY = "todo"
+
 export const useTodos = (filter?: TodoFilters) => {
   return useQuery({
-    queryKey: ["todos", filter],
+    queryKey: [TODOS_KEY, filter],
     queryFn: () => todoApi.getAll(filter),
   });
 };
 
 export const useTodo = (todoId: string) => {
   return useQuery({
-    queryKey: ["todo", todoId],
+    queryKey: [TODO_KEY, todoId],
     queryFn: () => todoApi.getOne(todoId),
     enabled: Boolean(todoId),
   });
@@ -29,7 +32,7 @@ export const useCreateTodo = () => {
 
   return useMutation({
     mutationFn: (todo: CreateTodoParams) => todoApi.create(todo),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["todos"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [TODOS_KEY] }),
   });
 };
 
@@ -41,8 +44,8 @@ export const useUpdateTodo = () => {
       return todoApi.update(todoId, updates);
     },
     onSuccess: (_, { todoId }) => {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
-      queryClient.invalidateQueries({ queryKey: ["todo", todoId] });
+      queryClient.invalidateQueries({ queryKey: [TODOS_KEY] });
+      queryClient.invalidateQueries({ queryKey: [TODO_KEY, todoId] });
     },
   });
 };
@@ -52,7 +55,7 @@ export const useDeleteTodo = () => {
 
   return useMutation({
     mutationFn: (todoId: DeleteTodoParams) => todoApi.delete(todoId),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["todos"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [TODOS_KEY] }),
   });
 };
 
@@ -61,6 +64,6 @@ export const useClearTodos = () => {
 
   return useMutation({
     mutationFn: () => todoApi.clear(),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["todos"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [TODOS_KEY] }),
   });
 };
