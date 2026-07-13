@@ -9,6 +9,8 @@ import type {
 
 const BASE_URL = "/api/todos";
 
+const getUrlWithId = (todoId: string) => `${BASE_URL}/${todoId}`;
+
 export const todoApi = {
   getAll: (filters?: TodoFilters) =>
     requestHandler<TodoSchema[], TodoFilters>((params) =>
@@ -17,7 +19,7 @@ export const todoApi = {
 
   getOne: (todoId: string) =>
     requestHandler<TodoSchema>(() =>
-      api({ url: `${BASE_URL}/${todoId}`, method: "GET" }),
+      api({ url: getUrlWithId(todoId), method: "GET" }),
     )(),
 
   create: (todo: TodoCreateBody) =>
@@ -27,12 +29,12 @@ export const todoApi = {
 
   update: (todoId: string, updates: TodoUpdateBody) =>
     requestHandler<TodoSchema>(() =>
-      api({ url: `${BASE_URL}/${todoId}`, method: "PUT", data: updates }),
+      api({ url: getUrlWithId(todoId), method: "PUT", data: updates }),
     )(),
 
   delete: (todoId: string) =>
     requestHandler<void>(() =>
-      api({ url: `${BASE_URL}/${todoId}`, method: "DELETE" }),
+      api({ url: getUrlWithId(todoId), method: "DELETE" }),
     )(),
 
   clear: () =>
