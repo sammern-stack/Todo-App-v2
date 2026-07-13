@@ -10,4 +10,9 @@ export type TodoSchema = {
 
 export type TodoFilters = Partial<Pick<TodoSchema, "stage">>;
 export type TodoCreateBody = Pick<TodoSchema, "title">;
+
 export type TodoUpdateBody = Partial<Pick<TodoSchema, "title" | "stage">>;
+export type TodoUpdateParams = {
+  todoId: string;
+  updates: TodoUpdateBody;
+};
