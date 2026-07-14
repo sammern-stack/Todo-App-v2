@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { PageLayout } from "@/shared/components";
+import { PageLayout } from "@/layout";
 import styles from "./NotFound.module.scss";
 
 const NotFound = () => {
