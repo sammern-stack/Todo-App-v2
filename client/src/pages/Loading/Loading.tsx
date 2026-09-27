@@ -3,7 +3,7 @@ import { PageLayout } from "@/layout";
 
 const Loading = () => {
   return (
-    <PageLayout className={styles["loading-page"]}>
+    <PageLayout>
       <div className={styles["loading-page__content"]}>
         <div className={styles["loading-page__spinner"]}>Loading...</div>
       </div>
