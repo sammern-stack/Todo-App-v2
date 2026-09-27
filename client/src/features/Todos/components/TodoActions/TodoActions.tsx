@@ -5,20 +5,16 @@ import { TodoFilters } from "../TodoFilters/TodoFilters";
 export const TodoActions = () => {
   const { data: todos = [] } = useTodos();
   const { mutate: clearTodos } = useClearTodos();
-  const handleClearTodos = () => clearTodos();
-  const todosLeft = todos.filter((todo) => todo.stage === "incomplete").length;
 
   return (
     <div className={styles.todosActions}>
       <p className={styles["todosActions__items-left"]}>
-        {todosLeft} items left
+        {todos.filter((todo) => todo.stage === "incomplete").length} items left
       </p>
-
       <TodoFilters />
-
       <button
         className={styles["todosActions__clear-all"]}
-        onClick={handleClearTodos}
+        onClick={() => clearTodos()}
       >
         Clear completed
       </button>

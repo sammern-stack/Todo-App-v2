@@ -2,10 +2,6 @@ import styles from "./CreateTodo.module.scss";
 import { useTodosStore } from "@/stores";
 import { useCreateTodo } from "@/features/Todos";
 import { Button } from "@/shared/components";
-import type {
-  InputChangeEvent,
-  InputKeyDownEvent,
-} from "@/shared/types/react.types";
 import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
 import { useState } from "react";
 
@@ -13,10 +9,7 @@ export const CreateTodo = () => {
   const [newTodoAdded, setNewTodoAdded] = useState(false);
   const newTodo = useTodosStore((s) => s.newTodo);
   const setNewTodo = useTodosStore((s) => s.setNewTodo);
-
   const { mutate: createTodo, error } = useCreateTodo();
-
-  if (error) console.error(JSON.stringify(error, null, 2));
 
   const errorMessage = error?.message.includes(":")
     ? error?.message.split(":")[2]?.trim()
@@ -25,16 +18,6 @@ export const CreateTodo = () => {
   const handleNewTodo = () => {
     createTodo({ title: newTodo });
     setNewTodo("");
-  };
-
-  const handleCreateTodo = (e: InputChangeEvent) => setNewTodo(e.target.value);
-
-  const handleKeyDown = (e: InputKeyDownEvent) => {
-    if (e.key === "Enter") {
-      handleNewTodo();
-      setNewTodoAdded(true);
-      setTimeout(() => setNewTodoAdded(false), 1000);
-    }
   };
 
   return (
@@ -53,8 +36,13 @@ export const CreateTodo = () => {
         className={styles["create-todo__input"]}
         placeholder={error ? errorMessage : "Create a new todo..."}
         value={newTodo}
-        onChange={handleCreateTodo}
-        onKeyDown={handleKeyDown}
+        onChange={(e) => setNewTodo(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key !== "Enter") return;
+          handleNewTodo();
+          setNewTodoAdded(true);
+          setTimeout(() => setNewTodoAdded(false), 1000);
+        }}
       />
 
       {error ? (

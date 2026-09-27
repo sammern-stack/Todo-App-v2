@@ -7,19 +7,16 @@ export const TodoFilters = () => {
   const filters = useFiltersStore((s) => s.filters);
   const setFilters = useFiltersStore((s) => s.setFilters);
 
-  const getFilterClasses = (filterName: Filters) =>
-    [
-      styles.filters__filter,
-      filters === filterName ? styles["filters__filter--active"] : "",
-    ].join(" ");
-
   return (
     <div className={styles.filters}>
       {FILTERS.map((name) => (
         <button
           key={name}
           type="button"
-          className={getFilterClasses(name)}
+          className={[
+            styles.filters__filter,
+            filters === name ? styles["filters__filter--active"] : "",
+          ].join(" ")}
           onClick={() => setFilters(name)}
         >
           {name}
