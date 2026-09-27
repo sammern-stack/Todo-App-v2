@@ -5,32 +5,34 @@ import { Button } from "@/shared/components";
 import CrossIcon from "@/assets/icon-cross.svg?react";
 import type { TodoSchema } from "@/shared/types/todo.types";
 
-export const TodoItem = ({ todo }: { todo: TodoSchema }) => {
+interface TodoItemProps {
+  todo: TodoSchema;
+}
+
+export const TodoItem = ({
+  todo: { _id, title, isComplete },
+}: TodoItemProps) => {
   const [deleting, setDeleting] = useState(false);
   const { mutate: deleteTodo } = useDeleteTodo();
   const { mutate: toggleTodo } = useToggleTodo();
 
-  const isCompleted = todo.isComplete;
-
-  const handleToggleState = () => toggleTodo(todo._id);
+  const handleToggleState = () => toggleTodo(_id);
   const handleDelete = () => {
     setDeleting(true);
-    setTimeout(() => {
-      deleteTodo(todo._id);
-    }, 500);
+    setTimeout(() => deleteTodo(_id), 500);
   };
 
   const todoClasses = [
     styles.todo,
-    isCompleted ? styles["todo--completed"] : "",
+    isComplete ? styles["todo--completed"] : "",
     deleting ? styles["todo--deleting"] : "",
   ].join(" ");
 
   return (
     <li className={todoClasses}>
-      <Button role="todo" isChecked={isCompleted} onClick={handleToggleState} />
+      <Button role="todo" isChecked={isComplete} onClick={handleToggleState} />
       <p className={styles.todo__title} onClick={handleToggleState}>
-        {todo.title}
+        {title}
       </p>
       <div className={styles.todo__actions}>
         <div className={styles.todo__delete}>
