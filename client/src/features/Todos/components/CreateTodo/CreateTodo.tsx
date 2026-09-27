@@ -1,5 +1,4 @@
 import styles from "./CreateTodo.module.scss";
-import { useTodosStore } from "@/stores";
 import { useCreateTodo } from "@/features/Todos";
 import { Button } from "@/shared/components";
 import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
@@ -7,8 +6,7 @@ import { useState } from "react";
 
 export const CreateTodo = () => {
   const [newTodoAdded, setNewTodoAdded] = useState(false);
-  const newTodo = useTodosStore((s) => s.newTodo);
-  const setNewTodo = useTodosStore((s) => s.setNewTodo);
+  const [newTodo, setNewTodo] = useState("");
   const { mutate: createTodo, error } = useCreateTodo();
 
   const errorMessage = error?.message.includes(":")
