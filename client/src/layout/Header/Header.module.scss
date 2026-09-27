@@ -1,9 +1,4 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  height: 30px;
-  margin-bottom: 24px;
-
   &__title {
     height: 100%;
     font: 700 xx-large/100% var(--base-font);
