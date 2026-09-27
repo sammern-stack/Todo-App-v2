@@ -1,6 +1,6 @@
 import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route } from "react-router";
-import { useThemeStore } from "./stores";
+import { useThemeStore } from "@/features/Settings";
 
 const LoadingPage = lazy(() => import("@/pages/Loading/Loading"));
 const HomePage = lazy(() => import("@/pages/Home/Home"));

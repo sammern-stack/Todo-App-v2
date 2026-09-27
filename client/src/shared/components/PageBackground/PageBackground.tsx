@@ -1,5 +1,5 @@
 import styles from "./PageBackground.module.scss";
-import { useThemeStore } from "@/stores";
+import { useThemeStore } from "@/features/Settings";
 import lightImg from "@/assets/bg-desktop-light.jpg";
 import darkImg from "@/assets/bg-desktop-dark.jpg";
 

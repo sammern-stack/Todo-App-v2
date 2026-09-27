@@ -1,5 +1,5 @@
 import styles from "./ThemeSwitch.module.scss";
-import { useThemeStore } from "@/stores/useThemeStore";
+import { useThemeStore } from "@/features/Settings";
 
 import MoonIcon from "@/assets/icon-moon.svg?react";
 import SunIcon from "@/assets/icon-sun.svg?react";
