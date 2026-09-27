@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route } from "react-router";
+import { PageBackground } from "@/shared/components";
 import { useThemeStore } from "@/features/Settings";
 
 const LoadingPage = lazy(() => import("@/pages/Loading/Loading"));
@@ -16,6 +17,7 @@ const App = () => {
 
   return (
     <Suspense fallback={<LoadingPage />}>
+      <PageBackground />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={<NotFoundPage />} />

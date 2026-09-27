@@ -1,18 +1,20 @@
-import { PageBackground } from "@/shared/components";
 import styles from "./PageLayout.module.scss";
+import { Header } from "../Header/Header";
+import { Footer } from "../Footer/Footer";
+import type { PropsWithChildren } from "react";
 
-interface PageLayoutProps {
+interface PageLayoutProps extends PropsWithChildren {
   className?: string;
-  children: React.ReactNode;
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
 }
 
-export const PageLayout = ({ className, children }: PageLayoutProps) => {
+export const PageLayout = ({ children, header, footer }: PageLayoutProps) => {
   return (
-    <div className={styles.pageLayout}>
-      <PageBackground />
-      <div className={`${styles.pageLayout__content} ${className ?? ""}`}>
-        {children}
-      </div>
+    <div className={styles.layout}>
+      <header className={styles.layout__header}>{header ?? <Header />}</header>
+      <main className={styles.layout__main}>{children}</main>
+      <footer className={styles.layout__footer}>{footer ?? <Footer />}</footer>
     </div>
   );
 };

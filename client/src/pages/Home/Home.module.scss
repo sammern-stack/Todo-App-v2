@@ -1,7 +1,9 @@
-@use "../../shared/styles/mixins" as *;
-
-.home {
-  height: 800px;
-  @include flex-gap(24px, column);
-  width: min(541px, 95%);
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--body-bg);
+  box-shadow: var(--box-shadow-1);
+  border-radius: 5px;
 }

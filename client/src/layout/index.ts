@@ -1,4 +1,3 @@
-export { HomeFooter } from "./HomeFooter/HomeFooter";
-export { HomeHeader } from "./HomeHeader/HomeHeader";
-export { TodosContent } from "./TodosContent/TodosContent";
+export { Footer } from "./Footer/Footer";
+export { Header } from "./Header/Header";
 export { PageLayout } from "./PageLayout/PageLayout";

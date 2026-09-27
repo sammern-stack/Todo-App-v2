@@ -1,13 +1,16 @@
 import styles from "./Home.module.scss";
-import { HomeFooter, HomeHeader, TodosContent } from "@/layout";
 import { PageLayout } from "@/layout";
+import { TodoList } from "@/features/Todos";
+import { CreateTodo, TodoActions } from "@/features/Todos";
 
 const Home = () => {
   return (
-    <PageLayout className={styles.home}>
-      <HomeHeader />
-      <TodosContent />
-      <HomeFooter />
+    <PageLayout>
+      <CreateTodo />
+      <section className={styles.content}>
+        <TodoList />
+        <TodoActions />
+      </section>
     </PageLayout>
   );
 };
