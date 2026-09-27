@@ -10,9 +10,9 @@ const todoSchema = new Schema<TodoSchema>(
       minLength: [3, "Title must be at least 3 characters"],
       set: (value: string) => value.trim(),
     },
-    stage: {
-      type: String,
-      default: "incomplete",
+    isComplete: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true },

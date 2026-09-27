@@ -15,7 +15,10 @@ import type {
 // ——— Services ————————————————————————————————————————————————————————————————————————————————————
 export const getTodos = async (filters: TodoFilters) => {
   const query: Record<string, unknown> = {};
-  if (filters.stage) query.stage = filters.stage;
+  if (filters.isComplete !== undefined) {
+    query.isComplete =
+      filters.isComplete === true || filters.isComplete === "true";
+  }
   return Todo.find(query).sort({ createdAt: -1 }).lean();
 };
 
@@ -51,8 +54,5 @@ export const deleteTodo = async (id: string) => {
 };
 
 export const clearTodos = async () => {
-  await Todo.updateMany(
-    { stage: "completed" },
-    { $set: { stage: "incomplete" } },
-  );
+  await Todo.updateMany({ isComplete: true }, { $set: { isComplete: false } });
 };

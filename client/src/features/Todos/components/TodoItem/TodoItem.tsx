@@ -10,13 +10,13 @@ export const TodoItem = ({ todo }: { todo: TodoSchema }) => {
   const { mutate: deleteTodo } = useDeleteTodo();
   const { mutate: updateTodo } = useUpdateTodo();
 
-  const isCompleted = todo.stage === "completed";
+  const isCompleted = todo.isComplete;
 
   const handleToggleState = () =>
     updateTodo({
       todoId: todo._id,
       updates: {
-        stage: isCompleted ? "incomplete" : "completed",
+        isComplete: !isCompleted,
       },
     });
   const handleDelete = () => {

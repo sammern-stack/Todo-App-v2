@@ -6,9 +6,7 @@ export const useBuildTodosQuery = () => {
   const filters = useFiltersStore((s) => s.filters);
   return useMemo<TodoFilters | undefined>(
     () =>
-      filters === "All"
-        ? undefined
-        : { stage: filters === "Active" ? "incomplete" : "completed" },
+      filters === "All" ? undefined : { isComplete: filters === "Completed" },
     [filters],
   );
 };

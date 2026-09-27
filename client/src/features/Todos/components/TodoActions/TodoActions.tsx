@@ -9,7 +9,7 @@ export const TodoActions = () => {
   return (
     <div className={styles.todosActions}>
       <p className={styles["todosActions__items-left"]}>
-        {todos.filter((todo) => todo.stage === "incomplete").length} items left
+        {todos.filter((todo) => !todo.isComplete).length} items left
       </p>
       <TodoFilters />
       <button
