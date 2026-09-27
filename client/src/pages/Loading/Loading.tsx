@@ -1,5 +1,5 @@
 import styles from "./Loading.module.scss";
-import { PageLayout } from "@/shared/components";
+import { PageLayout } from "@/layout";
 
 const Loading = () => {
   return (

@@ -1,4 +1,4 @@
-import { PageBackground } from "../PageBackground/PageBackground";
+import { PageBackground } from "@/shared/components";
 import styles from "./PageLayout.module.scss";
 
 interface PageLayoutProps {

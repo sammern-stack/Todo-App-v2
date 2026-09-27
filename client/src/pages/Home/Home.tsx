@@ -1,6 +1,6 @@
 import styles from "./Home.module.scss";
 import { HomeFooter, HomeHeader, TodosContent } from "@/layout";
-import { PageLayout } from "@/shared/components";
+import { PageLayout } from "@/layout";
 
 const Home = () => {
   return (
