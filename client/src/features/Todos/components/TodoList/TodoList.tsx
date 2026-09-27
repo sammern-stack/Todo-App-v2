@@ -1,12 +1,11 @@
 import styles from "./TodoList.module.scss";
-import { useTodosStore } from "@/stores";
 import { useTodos } from "@/features/Todos";
+import { useBuildTodosQuery } from "@/features/Todos";
 import { TodoItem } from "../TodoItem/TodoItem";
 
 export const TodoList = () => {
-  const filter = useTodosStore((s) => s.filter);
-  const getApiFilters = useTodosStore((s) => s.getApiFilters);
-  const { data: todos = [] } = useTodos(getApiFilters(filter));
+  const query = useBuildTodosQuery();
+  const { data: todos = [] } = useTodos(query);
 
   return (
     <ul className={styles.todosList}>

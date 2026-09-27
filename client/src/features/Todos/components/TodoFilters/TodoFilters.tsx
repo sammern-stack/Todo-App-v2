@@ -1,16 +1,16 @@
 import styles from "./TodoFilters.module.scss";
-import { type Filter, useTodosStore } from "@/stores/useTodosStore";
+import { type Filters, useFiltersStore } from "@/features/filters";
 
-const FILTERS: Filter[] = ["All", "Active", "Completed"];
+const FILTERS: Filters[] = ["All", "Active", "Completed"];
 
 export const TodoFilters = () => {
-  const filter = useTodosStore((s) => s.filter);
-  const setFilter = useTodosStore((s) => s.setFilter);
+  const filters = useFiltersStore((s) => s.filters);
+  const setFilters = useFiltersStore((s) => s.setFilters);
 
-  const getFilterClasses = (filterName: Filter) =>
+  const getFilterClasses = (filterName: Filters) =>
     [
       styles.filters__filter,
-      filter === filterName ? styles["filters__filter--active"] : "",
+      filters === filterName ? styles["filters__filter--active"] : "",
     ].join(" ");
 
   return (
@@ -20,7 +20,7 @@ export const TodoFilters = () => {
           key={name}
           type="button"
           className={getFilterClasses(name)}
-          onClick={() => setFilter(name)}
+          onClick={() => setFilters(name)}
         >
           {name}
         </button>
