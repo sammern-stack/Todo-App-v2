@@ -6,6 +6,7 @@ const router = Router();
 
 router.route("/").get(todoController.getTodos).post(todoController.createTodo);
 router.patch("/clear", todoController.clearTodos);
+router.patch("/:id/toggle", todoController.toggleTodo);
 router
   .route("/:id")
   .get(todoController.getTodo)

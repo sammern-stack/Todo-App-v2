@@ -13,7 +13,7 @@ import type {
   UpdateRequest,
   DeleteRequest,
 } from "@/shared/types/request.types.js";
-import type { TodoSchema, TodoFilters } from "./todo.types.js";
+import type { TodoFilters, TodoUpdateBody } from "./todo.types.js";
 
 // ——— Controllers —————————————————————————————————————————————————————————————————————————————————
 export const getTodos = asyncHandler(
@@ -43,9 +43,16 @@ export const createTodo = asyncHandler(
 );
 
 export const updateTodo = asyncHandler(
-  async (req: UpdateRequest<Partial<TodoSchema>>, res: Response) => {
+  async (req: UpdateRequest<TodoUpdateBody>, res: Response) => {
     const todo = await todoService.updateTodo(req.params.id!, req.body);
     sendSuccess(res, 200, "Todo updated successfully", todo);
+  },
+);
+
+export const toggleTodo = asyncHandler(
+  async (req: GetOneRequest, res: Response) => {
+    const todo = await todoService.toggleTodo(req.params.id!);
+    sendSuccess(res, 200, "Todo toggled successfully", todo);
   },
 );
 

@@ -8,7 +8,6 @@ export type TodoSchema = {
 
 export type TodoFilters = Partial<Pick<TodoSchema, "isComplete">>;
 export type TodoCreateBody = Pick<TodoSchema, "title">;
-
 export type TodoUpdateBody = Partial<Pick<TodoSchema, "title" | "isComplete">>;
 export type TodoUpdateParams = {
   todoId: string;

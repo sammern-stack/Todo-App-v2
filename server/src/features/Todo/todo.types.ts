@@ -7,4 +7,4 @@ export type TodoSchema = {
 
 export type TodoFilters = { isComplete?: boolean | "true" | "false" };
 export type TodoCreateBody = Pick<TodoSchema, "title">;
-export type TodoUpdateBody = Partial<TodoSchema>;
+export type TodoUpdateBody = Partial<Pick<TodoSchema, "title" | "isComplete">>;

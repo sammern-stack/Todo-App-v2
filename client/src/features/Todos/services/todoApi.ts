@@ -32,6 +32,11 @@ export const todoApi = {
       api({ url: getUrlWithId(todoId), method: "PUT", data: updates }),
     )(),
 
+  toggle: (todoId: string) =>
+    requestHandler<TodoSchema>(() =>
+      api({ url: `${getUrlWithId(todoId)}/toggle`, method: "PATCH" }),
+    )(),
+
   delete: (todoId: string) =>
     requestHandler<void>(() =>
       api({ url: getUrlWithId(todoId), method: "DELETE" }),

@@ -37,10 +37,21 @@ export const useUpdateTodo = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ todoId, updates }: TodoUpdateParams) => {
-      return todoApi.update(todoId, updates);
-    },
+    mutationFn: ({ todoId, updates }: TodoUpdateParams) =>
+      todoApi.update(todoId, updates),
     onSuccess: (_, { todoId }) => {
+      queryClient.invalidateQueries({ queryKey: [TODOS_KEY] });
+      queryClient.invalidateQueries({ queryKey: [TODO_KEY, todoId] });
+    },
+  });
+};
+
+export const useToggleTodo = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (todoId: string) => todoApi.toggle(todoId),
+    onSuccess: (_, todoId) => {
       queryClient.invalidateQueries({ queryKey: [TODOS_KEY] });
       queryClient.invalidateQueries({ queryKey: [TODO_KEY, todoId] });
     },

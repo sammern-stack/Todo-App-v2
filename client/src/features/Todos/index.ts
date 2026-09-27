@@ -9,6 +9,7 @@ export {
   useTodo,
   useCreateTodo,
   useUpdateTodo,
+  useToggleTodo,
   useDeleteTodo,
   useClearTodos,
 } from "./hooks/useTodos";

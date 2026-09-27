@@ -1,6 +1,6 @@
 import styles from "./TodoItem.module.scss";
 import { useState } from "react";
-import { useDeleteTodo, useUpdateTodo } from "@/features/Todos";
+import { useDeleteTodo, useToggleTodo } from "@/features/Todos";
 import { Button } from "@/shared/components";
 import CrossIcon from "@/assets/icon-cross.svg?react";
 import type { TodoSchema } from "@/shared/types/todo.types";
@@ -8,17 +8,11 @@ import type { TodoSchema } from "@/shared/types/todo.types";
 export const TodoItem = ({ todo }: { todo: TodoSchema }) => {
   const [deleting, setDeleting] = useState(false);
   const { mutate: deleteTodo } = useDeleteTodo();
-  const { mutate: updateTodo } = useUpdateTodo();
+  const { mutate: toggleTodo } = useToggleTodo();
 
   const isCompleted = todo.isComplete;
 
-  const handleToggleState = () =>
-    updateTodo({
-      todoId: todo._id,
-      updates: {
-        isComplete: !isCompleted,
-      },
-    });
+  const handleToggleState = () => toggleTodo(todo._id);
   const handleDelete = () => {
     setDeleting(true);
     setTimeout(() => {
