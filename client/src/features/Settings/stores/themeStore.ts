@@ -7,10 +7,6 @@ interface ThemeStore {
   toggleTheme: () => void;
 }
 
-//—————————————————————————————————————————————————————————————————
-// Theme Store
-//—————————————————————————————————————————————————————————————————
-
 export const useThemeStore = create<ThemeStore>()(
   persist(
     (set) => ({

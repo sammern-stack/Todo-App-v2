@@ -42,20 +42,17 @@ export const updateTodo = async (id: string, updates: TodoUpdateBody) => {
 };
 
 export const toggleTodo = async (id: string) => {
-  const todo = await Todo.findByIdAndUpdate(
+  const todo = await searchDocument(id, Todo);
+  if (!todo) throw new AppError("Todo not found", 404);
+
+  const updatedTodo = await Todo.findByIdAndUpdate(
     id,
-    [
-      {
-        $set: {
-          isComplete: { $not: ["$isComplete"] },
-        },
-      },
-    ],
+    { $set: { isComplete: !todo.isComplete } },
     queryOptions,
   );
 
-  if (!todo) throw new AppError("Todo not found", 404);
-  return todo;
+  if (!updatedTodo) throw new AppError("Todo not found", 404);
+  return updatedTodo;
 };
 
 export const deleteTodo = async (id: string) => {
