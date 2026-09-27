@@ -6,23 +6,28 @@ import { useState } from "react";
 
 export const CreateTodo = () => {
   const [newTodoAdded, setNewTodoAdded] = useState(false);
-  const [newTodo, setNewTodo] = useState("");
-  const { mutate: createTodo, error } = useCreateTodo();
-
-  const errorMessage = error?.message.includes(":")
-    ? error?.message.split(":")[2]?.trim()
-    : error?.message;
+  const [title, setTitle] = useState("");
+  const [todoError, setTodoError] = useState("");
+  const { mutate: createTodo } = useCreateTodo();
 
   const handleNewTodo = () => {
-    createTodo({ title: newTodo });
-    setNewTodo("");
+    setTodoError("");
+    createTodo(
+      { title },
+      {
+        onError: ({ message }) => {
+          setTodoError(message.split(":")[2]?.trim() || message);
+        },
+      },
+    );
+    setTitle("");
   };
 
   return (
     <div
       className={[
         styles["create-todo"],
-        error
+        todoError
           ? styles["create-todo--error"]
           : newTodoAdded && styles["create-todo--success"],
       ].join(" ")}
@@ -32,9 +37,9 @@ export const CreateTodo = () => {
       <input
         type="text"
         className={styles["create-todo__input"]}
-        placeholder={error ? errorMessage : "Create a new todo..."}
-        value={newTodo}
-        onChange={(e) => setNewTodo(e.target.value)}
+        placeholder={todoError || "Create a new todo..."}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         onKeyDown={(e) => {
           if (e.key !== "Enter") return;
           handleNewTodo();
@@ -43,7 +48,7 @@ export const CreateTodo = () => {
         }}
       />
 
-      {error ? (
+      {todoError ? (
         <div className={styles["create-todo__error"]}>
           <BiErrorCircle />
         </div>
