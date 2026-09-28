@@ -1,5 +1,6 @@
 export { TodoActions } from "./components/TodoActions/TodoActions";
 export { CreateForm } from "./components/CreateForm/CreateForm";
+export { Todo } from "./components/Todo/Todo";
 
 export {
   useTodos,
