@@ -9,14 +9,6 @@
   &__items-left {
     color: inherit;
   }
-
-  &__clear-all {
-    color: inherit;
-
-    &:hover {
-      color: var(--todo-actions-hover);
-    }
-  }
 }
 
 .filters {

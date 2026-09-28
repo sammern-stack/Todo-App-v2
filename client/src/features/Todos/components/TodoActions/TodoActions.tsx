@@ -1,20 +1,25 @@
 import styles from "./TodoActions.module.scss";
-import { useClearTodos, useTodos } from "@/features/Todos";
+import { useClearTodos } from "@/features/Todos";
 import { useFiltersStore, type Filters } from "@/features/filters";
 import { Button } from "@/shared/components";
 
 const todoFilters: Filters[] = ["All", "Active", "Completed"];
 
-export const TodoActions = () => {
-  const { data: todos = [] } = useTodos();
+interface TodoActionsProps {
+  todosLeft: number;
+}
+
+export const TodoActions = ({ todosLeft }: TodoActionsProps) => {
   const { mutate: clearTodos } = useClearTodos();
   const filters = useFiltersStore((s) => s.filters);
   const setFilters = useFiltersStore((s) => s.setFilters);
 
+  const handleClearTodos = () => clearTodos();
+
   return (
     <div className={styles.todosActions}>
       <p className={styles["todosActions__items-left"]}>
-        {todos.filter((todo) => !todo.isComplete).length} items left
+        {todosLeft} items left
       </p>
       <div className={styles.filters}>
         {todoFilters.map((filter) => (
@@ -28,7 +33,7 @@ export const TodoActions = () => {
           </Button>
         ))}
       </div>
-      <Button onClick={() => clearTodos()}>Clear completed</Button>
+      <Button onClick={handleClearTodos}>Clear completed</Button>
     </div>
   );
 };

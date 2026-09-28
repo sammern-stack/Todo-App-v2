@@ -15,6 +15,7 @@ import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
 
 const Home = () => {
   const { data: todos = [] } = useTodos(useBuildTodosQuery());
+  const todosLeft = todos.filter((todo) => !todo.isComplete).length;
   const [newTodoAdded, setNewTodoAdded] = useState(false);
   const [todoError, setTodoError] = useState<string | undefined>(undefined);
 
@@ -44,7 +45,7 @@ const Home = () => {
             <Todo key={todo._id} todo={todo} />
           ))}
         </ul>
-        <TodoActions />
+        <TodoActions todosLeft={todosLeft} />
       </section>
     </PageLayout>
   );
