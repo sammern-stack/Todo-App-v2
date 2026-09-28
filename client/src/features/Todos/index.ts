@@ -1,9 +1,6 @@
-// ——— Components ——————————————————————————————————————————————————————————————————————————————————
-export { CreateTodo } from "./components/CreateTodo/CreateTodo";
-export { TodoList } from "./components/TodoList/TodoList";
 export { TodoActions } from "./components/TodoActions/TodoActions";
+export { CreateForm } from "./components/CreateForm/CreateForm";
 
-// ——— Hooks ———————————————————————————————————————————————————————————————————————————————————————
 export {
   useTodos,
   useTodo,
