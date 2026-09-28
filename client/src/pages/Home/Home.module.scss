@@ -10,7 +10,7 @@
   border-radius: 5px;
 }
 
-.todosList {
+.todoList {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -78,34 +78,24 @@
     outline: none;
     border: none;
   }
+}
 
-  &__error {
-    width: 24px;
-    height: 24px;
-    color: var(--error-color);
+.todosActions {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  font: var(--text-preset-2);
+  color: var(--todo-actions);
+  border-top: 1px solid var(--color-purple-800);
 
-    > svg {
-      width: 100%;
-      height: 100%;
-    }
+  &__itemsLeft {
+    color: inherit;
   }
+}
 
-  &__success {
-    width: 24px;
-    height: 24px;
-    color: var(--success-color);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-
-    &--created {
-      opacity: 1;
-    }
-
-    > svg {
-      width: 100%;
-      height: 100%;
-    }
-  }
+.filters {
+  display: flex;
+  gap: 8px;
 }
 
 @keyframes errorBounce {
