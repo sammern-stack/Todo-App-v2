@@ -1,28 +1,28 @@
 import styles from "./Button.module.scss";
-import CheckIcon from "@/assets/icon-check.svg?react";
-import type { BaseButtonProps } from "@/shared/types/react.types";
+import { cls } from "@/shared/utils/formatters";
+import type { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 
-type ButtonProps = {
-  role: "create" | "todo";
-  isChecked?: boolean;
-} & BaseButtonProps;
+type ButtonProps = PropsWithChildren & {
+  variant?: "primary" | "secondary" | "selectable";
+  isSelected?: boolean;
+} & ComponentPropsWithoutRef<"button">;
 
-export const Button = ({ role, isChecked, ...props }: ButtonProps) => {
-  const classes = [
-    styles["button"],
-    styles[`button--${isChecked ? "checked" : "notChecked"}`],
-    styles[`button--${!isChecked ? "hasHover" : "noHover"}`],
-  ].join(" ");
-
-  const isEmptyState = role === "create" || !isChecked;
+export const Button = ({
+  variant = "primary",
+  isSelected,
+  children,
+  ...props
+}: ButtonProps) => {
+  const buttonType = props.type ?? "button";
+  const buttonClassNames = cls(
+    styles.button,
+    styles[`button--${variant}`],
+    variant === "selectable" && isSelected && styles["button--selected"],
+  );
 
   return (
-    <button type="button" className={classes} {...props}>
-      {isEmptyState ? (
-        <div className={styles["button--empty-state"]}></div>
-      ) : (
-        <CheckIcon />
-      )}
+    <button type={buttonType} className={buttonClassNames} {...props}>
+      {children}
     </button>
   );
 };

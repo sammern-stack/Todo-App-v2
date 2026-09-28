@@ -1,25 +1,23 @@
-@use "../../../shared/styles/mixins" as *;
-
 .button {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  border: 2px solid var(--btn-border);
-  border-radius: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font: var(--text-preset-2);
 
-  &--hasHover:hover,
-  &--checked {
-    background: var(--gradient-1);
+  &--primary {
+    color: var(--todo-actions);
+
+    &:hover {
+      color: var(--todo-actions-hover);
+    }
   }
 
-  &--empty-state {
-    width: 18px;
-    height: 18px;
-    border-radius: 100vh;
-    background: var(--body-bg);
-    @include absolute-center;
+  &--selectable {
+    color: var(--todo-actions);
+
+    &:hover {
+      color: var(--todo-actions-hover);
+    }
+  }
+
+  &--selected {
+    color: var(--todo-actions-active);
   }
 }

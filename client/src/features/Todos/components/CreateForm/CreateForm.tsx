@@ -1,7 +1,6 @@
 import styles from "./CreateForm.module.scss";
 import { useState } from "react";
 import { useCreateTodo } from "../../hooks/useTodos";
-import { Button } from "@/shared/components";
 
 type FormEvent = React.ChangeEvent<HTMLFormElement>;
 type ButtonClickEvent = React.MouseEvent<HTMLButtonElement>;
@@ -41,7 +40,9 @@ export const CreateForm = ({ onNewTodo, error }: CreateFormProps) => {
 
   return (
     <form onSubmit={onSubmit} className={styles.form}>
-      <Button role="create" onClick={onSubmit} />
+      <button type="submit" className={styles.form__submit}>
+        <div className={styles["form__submit--bg"]}></div>
+      </button>
       <input
         className={styles.form__input}
         placeholder={todoError || "Create a new todo..."}
